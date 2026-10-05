@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - name: Corpus is up to date
+        run: npm run corpus && git diff --exit-code corpus/en-so.tsv
+      - name: Bundle for Android
+        run: npx expo export --platform android --output-dir /tmp/export

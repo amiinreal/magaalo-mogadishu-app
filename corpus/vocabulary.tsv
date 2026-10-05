@@ -1,0 +1,135 @@
+english	somali	type	domain
+road	waddo	word	navigation
+street	jid	word	navigation
+main road	waddada weyn	phrase	navigation
+roundabout	wareeg	word	navigation
+junction	isgoys	word	navigation
+intersection	isgoys	word	navigation
+traffic light	nalka taraafikada	phrase	navigation
+bridge	buundo	word	navigation
+left	bidix	word	navigation
+right	midig	word	navigation
+straight	toos	word	navigation
+ahead	hore	word	navigation
+behind	gadaal	word	navigation
+near	u dhow	word	navigation
+far	fog	word	navigation
+north	waqooyi	word	direction
+south	koonfur	word	direction
+east	bari	word	direction
+west	galbeed	word	direction
+map	khariidad	word	app
+route	jid	word	navigation
+directions	tilmaamo	word	navigation
+destination	meesha aad u socoto	phrase	navigation
+start	bilow	word	app
+stop	jooji	word	app
+end	dhammee	word	app
+search	raadi	word	app
+save	keydi	word	app
+report	warbixin	word	app
+review	faallo	word	app
+suggestion	soo jeedin	word	app
+language	luqad	word	app
+settings	dejin	word	app
+account	akoon	word	app
+location	goob	word	navigation
+my location	goobtayda	phrase	navigation
+minute	daqiiqo	word	time
+minutes	daqiiqo	word	time
+hour	saacad	word	time
+hours	saacadood	word	time
+today	maanta	word	time
+now	hadda	word	time
+meter	mitir	word	unit
+meters	mitir	word	unit
+kilometer	kiiloomitir	word	unit
+kilometers	kiiloomitir	word	unit
+car	baabuur	word	transport
+bus	bas	word	transport
+minibus	baabuur yar oo rakaab	phrase	transport
+taxi	tagsi	word	transport
+bajaj	bajaaj	word	transport
+bicycle	baaskiil	word	transport
+on foot	lug	phrase	transport
+walking	socod lug ah	phrase	transport
+driving	wadid baabuur	phrase	transport
+bus stop	boosteejada baska	phrase	transport
+petrol station	kaalinta shidaalka	phrase	place
+market	suuq	word	place
+shop	dukaan	word	place
+restaurant	makhaayad	word	place
+cafe	maqaaxi	word	place
+hotel	hoteel	word	place
+hospital	isbitaal	word	place
+clinic	rug caafimaad	phrase	place
+pharmacy	farmashiye	word	place
+mosque	masjid	word	place
+school	dugsi	word	place
+university	jaamacad	word	place
+bank	bangi	word	place
+police station	saldhigga booliska	phrase	place
+airport	garoonka diyaaradaha	phrase	place
+port	dekedda	word	place
+beach	xeeb	word	place
+park	beer	word	place
+stadium	garoonka kubadda	phrase	place
+ministry	wasaarad	word	place
+office	xafiis	word	place
+building	dhismo	word	place
+house	guri	word	place
+home	guriga	word	place
+work	shaqada	word	place
+district	degmo	word	place
+neighborhood	xaafad	word	place
+city	magaalo	word	place
+Mogadishu	Muqdisho	name	place
+closed	xiran	word	condition
+open	furan	word	condition
+road closed	waddo xiran	phrase	condition
+road open	waddo furan	phrase	condition
+traffic	ciriiri	word	condition
+heavy traffic	ciriiri baabuur	phrase	condition
+flood	daad	word	condition
+flooding	daad	word	condition
+hazard	khatar	word	condition
+accident	shil	word	condition
+checkpoint	baaritaan	word	condition
+construction	dhismo socda	phrase	condition
+yes	haa	word	common
+no	maya	word	common
+thank you	mahadsanid	phrase	common
+please	fadlan	word	common
+help	caawimaad	word	common
+error	khalad	word	common
+try again	isku day mar kale	phrase	common
+Turn left at the roundabout.	Wareegga bidix uga leexo.	sentence	navigation
+Turn right at the next junction.	Isgoyska xiga midig uga leexo.	sentence	navigation
+Go straight for two kilometers.	Toos u soco laba kiiloomitir.	sentence	navigation
+Make a U-turn when possible.	Dib u soo wareeg marka ay suurtagal tahay.	sentence	navigation
+Your destination is on the right.	Meesha aad u socoto waxay ku taal dhanka midig.	sentence	navigation
+You have arrived at your destination.	Waxaad gaartay meeshii aad u socotay.	sentence	navigation
+The road ahead is closed.	Waddada hortaada ah way xiran tahay.	sentence	condition
+The road is open again.	Waddadu mar kale way furan tahay.	sentence	condition
+There is heavy traffic near the market.	Ciriiri baabuur ayaa ka jira agagaarka suuqa.	sentence	condition
+This building exists.	Dhismahan wuu jiraa.	sentence	condition
+This building does not exist.	Dhismahan ma jiro.	sentence	condition
+Several people reported this road as closed.	Dad badan ayaa soo sheegay in waddadan xiran tahay.	sentence	condition
+A new route avoids the closed road.	Jid cusub ayaa ka leexanaya waddada xiran.	sentence	navigation
+Where is the nearest hospital?	Xaggee buu ku yaal isbitaalka ugu dhow?	sentence	question
+How far is the airport?	Intee buu u jiraa garoonka diyaaradaha?	sentence	question
+How long will it take?	Intee in le'eg ayay qaadan doontaa?	sentence	question
+Is this road open?	Waddadani ma furan tahay?	sentence	question
+Which way to Bakaaraha Market?	Xaggee laga maraa Suuqa Bakaaraha?	sentence	question
+I want to go to Liido Beach.	Waxaan rabaa inaan aado Xeebta Liido.	sentence	request
+Take me home.	Gurigayga i geey.	sentence	request
+Show me the map.	I tus khariidadda.	sentence	request
+Please rate your trip.	Fadlan qiimee safarkaaga.	sentence	feedback
+How were the directions?	Sidee ahaayeen tilmaamaha?	sentence	feedback
+The directions were good.	Tilmaamuhu way wanaagsanaayeen.	sentence	feedback
+The directions were wrong.	Tilmaamuhu way khaldanaayeen.	sentence	feedback
+Thank you for your report.	Mahadsanid warbixintaada.	sentence	feedback
+Your location is outside Mogadishu.	Goobtaadu waxay ka baxsan tahay Muqdisho.	sentence	status
+You are offline.	Internet ma jiro.	sentence	status
+Waiting for GPS.	Waxaa la sugayaa GPS.	sentence	status
+Finding a new route.	Jid cusub ayaa la raadinayaa.	sentence	status

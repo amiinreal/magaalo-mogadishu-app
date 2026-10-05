@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "Magaalo",
+    "slug": "magaalo",
+    "scheme": "magaalo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.amiinreal.magaalo",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Magaalo uses your location to show where you are and guide you around Mogadishu."
+      }
+    },
+    "android": {
+      "package": "com.amiinreal.magaalo",
+      "adaptiveIcon": {
+        "backgroundColor": "#1D4B40",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Magaalo uses your location to show where you are and guide you around Mogadishu."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

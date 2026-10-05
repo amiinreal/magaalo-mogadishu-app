@@ -1,0 +1,516 @@
+english	somali	type	domain	source
+A city map. A simpler way there.	Khariidad magaalo. Jid fudud oo loo maro.	sentence	app	ui:app.tagline
+Where to?	Xaggee loo socdaa?	sentence	search	ui:search.placeholder
+Search Mogadishu	Ka raadi Muqdisho	phrase	search	ui:search.title
+Choose on map	Ka dooro khariidadda	phrase	search	ui:search.chooseOnMap
+Drop a destination pin	Calaamadee meesha aad u socoto	phrase	search	ui:search.chooseOnMapHint
+Recent	Dhowaan	word	search	ui:search.recent
+No places found for “{query}”.	Lama helin meel la yiraahdo “{query}”.	sentence	search	ui:search.noResults
+Searching…	Waa la raadinayaa…	word	search	ui:search.loading
+Go here	Halkan u soco	phrase	search	ui:search.pinHere
+Dropped pin	Calaamad la dhigay	phrase	search	ui:search.droppedPin
+Restaurants	Makhaayado	word	chips	ui:chips.restaurants
+Petrol	Shidaal	word	chips	ui:chips.petrol
+Markets	Suuqyo	word	chips	ui:chips.markets
+Hospitals	Isbitaallo	word	chips	ui:chips.hospitals
+Mosques	Masaajid	word	chips	ui:chips.mosques
+Hotels	Hoteello	word	chips	ui:chips.hotels
+Banks	Bangiyo	word	chips	ui:chips.banks
+Schools	Dugsiyo	word	chips	ui:chips.schools
+Pharmacies	Farmashiyeyaal	word	chips	ui:chips.pharmacies
+More	Wax kale	word	chips	ui:chips.more
+Where are you going?	Xaggee u socotaa?	sentence	explore	ui:explore.whereGoing
+Home	Guriga	word	explore	ui:explore.home
+Add home	Ku dar guriga	phrase	explore	ui:explore.homeHint
+Work	Shaqada	word	explore	ui:explore.work
+Add work	Ku dar shaqada	phrase	explore	ui:explore.workHint
+Saved places	Meelaha la keydiyay	phrase	explore	ui:explore.saved
+Your favorites, one tap away	Meelaha aad jeceshahay, hal taabasho	phrase	explore	ui:explore.savedHint
+Explore districts	Baadh degmooyinka	phrase	explore	ui:explore.districts
+City transport	Gaadiidka magaalada	phrase	explore	ui:explore.transport
+Directions	Tilmaamaha jidka	word	place	ui:place.directions
+Suggest a change	Soo jeedi isbeddel	phrase	place	ui:place.suggest
+Missing or incorrect information	Macluumaad maqan ama khaldan	phrase	place	ui:place.suggestHint
+Save	Keydi	word	place	ui:place.save
+Saved	La keydiyay	word	place	ui:place.saved
+{rating} ★ · {count} reviews	{rating} ★ · {count} faallo	phrase	place	ui:place.rating
+No reviews yet	Weli faallo ma jirto	phrase	place	ui:place.noReviews
+Set as home	Ka dhig guriga	phrase	place	ui:place.setHome
+Set as work	Ka dhig shaqada	phrase	place	ui:place.setWork
+Your location	Goobtaada	phrase	route	ui:route.yourLocation
+Destination	Meesha aad u socoto	word	route	ui:route.destination
+Drive	Baabuur	word	route	ui:route.drive
+Walk	Lug	word	route	ui:route.walk
+Cycle	Baaskiil	word	route	ui:route.cycle
+{n} min	{n} daqiiqo	phrase	route	ui:route.minutes
+Arrive at {time}	Gaarid {time}	phrase	route	ui:route.arriveAt
+Start	Bilow	word	route	ui:route.start
+Fastest route	Jidka ugu dhakhsaha badan	phrase	route	ui:route.fastest
+Fastest route · avoids a road closure	Jidka ugu dhakhsaha badan · wuu ka leexanayaa waddo xiran	phrase	route	ui:route.avoidsClosure
+Fastest route · avoids {n} road closures	Jidka ugu dhakhsaha badan · wuu ka leexanayaa {n} waddo oo xiran	phrase	route	ui:route.avoidsClosures
+Alternative: {min} min · {distance}	Jid kale: {min} daqiiqo · {distance}	phrase	route	ui:route.alternative
+Finding your route…	Jidkaaga waa la raadinayaa…	phrase	route	ui:route.finding
+The route service is unavailable. Try again.	Adeegga jidadka lama heli karo. Isku day mar kale.	sentence	route	ui:route.failed
+Allow location access to start from your position.	Oggolow goobta si aad uga bilowdo meeshaada.	sentence	route	ui:route.locationNeeded
+Your location is outside Mogadishu. Choose a start on the map.	Goobtaadu waxay ka baxsan tahay Muqdisho. Khariidadda ka dooro meel aad ka bilowdo.	sentence	route	ui:route.outside
+End	Dhammee	word	nav	ui:nav.end
+{distance} · {time} arrival	{distance} · gaarid {time}	phrase	nav	ui:nav.arrival
+Finding a new route…	Jid cusub ayaa la raadinayaa…	phrase	nav	ui:nav.rerouting
+You are away from the route	Waad ka leexatay jidka	phrase	nav	ui:nav.offRoute
+Waiting for GPS…	Waxaa la sugayaa GPS…	phrase	nav	ui:nav.waitingGps
+Weak GPS signal (±{m} m)	Calaamadda GPS waa daciif (±{m} m)	phrase	nav	ui:nav.gpsWeak
+Outside Mogadishu	Muqdisho dibaddeeda	phrase	nav	ui:nav.outside
+Route updated	Jidka waa la cusboonaysiiyay	phrase	nav	ui:nav.routeUpdated
+Simulated trip	Safar la jilay	phrase	nav	ui:nav.simulating
+Road closed ahead	Waddo xiran ayaa hortaada ah	phrase	closure	ui:closure.ahead
+Reported by {n} people · {ago}	{n} qof ayaa soo sheegay · {ago}	phrase	closure	ui:closure.reportedBy
+A new route avoids this section.	Jid cusub ayaa ka leexanaya qaybtan.	sentence	closure	ui:closure.newRoute
+Continue · +{n} min	Sii wad · +{n} daqiiqo	phrase	closure	ui:closure.continue
+Road is open?	Waddadu ma furan tahay?	sentence	closure	ui:closure.isOpen
+Let others know	U sheeg dadka kale	phrase	closure	ui:closure.letOthers
+What's happening?	Maxaa dhacaya?	sentence	report	ui:report.title
+Road closed	Waddo xiran	phrase	report	ui:report.roadClosed
+Road open again	Waddadu way furantay	phrase	report	ui:report.roadOpen
+Place or building	Meel ama dhismo	phrase	report	ui:report.building
+Flooding	Daad	word	report	ui:report.flooding
+Heavy traffic	Ciriiri baabuur	phrase	report	ui:report.traffic
+Something else	Wax kale	phrase	report	ui:report.other
+Report when it's safe to stop.	Soo sheeg marka ay ammaan tahay inaad joogsato.	sentence	report	ui:report.safety
+Is this the right spot?	Tani ma meeshii saxda ahayd?	sentence	report	ui:report.rightSpot
+Move the map to adjust.	Dhaqaaji khariidadda si aad u saxdo.	sentence	report	ui:report.moveMap
+Selected road section	Qaybta waddada la doortay	phrase	report	ui:report.selectedSection
+Send report	Dir warbixinta	phrase	report	ui:report.send
+Add a note (optional)	Ku dar qoraal (ikhtiyaari)	phrase	report	ui:report.addNote
+Sending…	Waa la dirayaa…	word	report	ui:report.sending
+Thanks — report sent	Mahadsanid — warbixinta waa la diray	phrase	report	ui:report.thanks
+We'll check it with other reports.	Waxaan la barbar dhigi doonnaa warbixinnada kale.	sentence	report	ui:report.willCheck
+Keep exploring	Sii baadh	phrase	report	ui:report.keepExploring
+Back to map	Ku noqo khariidadda	phrase	report	ui:report.backToMap
+No extra steps. You're ready to go.	Tallaabo dheeraad ah ma jirto. Waad diyaar tahay.	sentence	report	ui:report.noSteps
+Sign in to send reports.	Gal si aad warbixin u dirto.	sentence	report	ui:report.signIn
+Reports are disabled during simulated trips.	Warbixinnada lama diri karo inta safar la jilayo.	sentence	report	ui:report.simulated
+Selected building or map pin	Dhismaha ama calaamadda la doortay	phrase	suggest	ui:suggest.subtitle
+This place exists	Meeshan way jirtaa	phrase	suggest	ui:suggest.exists
+This place doesn't exist	Meeshan ma jirto	phrase	suggest	ui:suggest.notExists
+Add a missing place	Ku dar meel maqan	phrase	suggest	ui:suggest.addMissing
+Tap an option to send your suggestion.	Taabo doorasho si aad u dirto soo jeedintaada.	sentence	suggest	ui:suggest.tapOption
+Building exists	Dhismuhu wuu jiraa	phrase	alert	ui:alert.building
+Building no longer exists	Dhismuhu ma sii jiro	phrase	alert	ui:alert.buildingGone
+Hazard	Khatar	word	alert	ui:alert.hazard
+Confirmed by {n} people	{n} qof ayaa xaqiijiyay	phrase	alert	ui:alert.confirmed
+Reported — not confirmed yet	La soo sheegay — weli lama xaqiijin	phrase	alert	ui:alert.suspected
+Is it still there?	Weli ma jiraa?	sentence	alert	ui:alert.stillThere
+Yes, still there	Haa, weli wuu jiraa	phrase	alert	ui:alert.yes
+No, it's gone	Maya, ma jiro	phrase	alert	ui:alert.no
+{p}% confidence	{p}% kalsooni	phrase	alert	ui:alert.confidence
+Updated {ago}	La cusboonaysiiyay {ago}	phrase	alert	ui:alert.updated
+You've arrived	Waad gaartay	phrase	arrive	ui:arrive.title
+How were the directions?	Sidee ahaayeen tilmaamaha?	sentence	arrive	ui:arrive.question
+Anything wrong?	Wax khaldan ma jiray?	sentence	arrive	ui:arrive.issues
+Add a comment (optional)	Ku dar faallo (ikhtiyaari)	phrase	arrive	ui:arrive.comment
+Done	Dhammee	word	arrive	ui:arrive.done
+Skip	Ka gudub	word	arrive	ui:arrive.skip
+Thanks for your review!	Mahadsanid faalladaada!	sentence	arrive	ui:arrive.thanks
+Sign in to share your review.	Gal si aad faalladaada u wadaagto.	sentence	arrive	ui:arrive.signIn
+Road was closed	Waddadu way xirnayd	phrase	issue	ui:issue.road_closed
+Wrong turn	Leexasho khaldan	phrase	issue	ui:issue.wrong_turn
+Place missing	Meeshu ma jirin	phrase	issue	ui:issue.place_missing
+Traffic	Ciriiri	word	issue	ui:issue.traffic
+Bad road	Waddo xun	phrase	issue	ui:issue.bad_road
+Unsafe area	Aag aan ammaan ahayn	phrase	issue	ui:issue.unsafe
+Save places to reach them in one tap.	Keydi meelaha si aad hal taabasho ugu gaarto.	sentence	saved	ui:saved.empty
+Remove	Ka saar	word	saved	ui:saved.remove
+Back	Dib u noqo	word	common	ui:common.back
+Cancel	Jooji	word	common	ui:common.cancel
+Close	Xir	word	common	ui:common.close
+Try again	Isku day mar kale	phrase	common	ui:common.retry
+Something went wrong. Please try again.	Wax baa khaldamay. Fadlan isku day mar kale.	sentence	common	ui:common.error
+Mogadishu	Muqdisho	word	common	ui:common.mogadishu
+On	Shidan	word	common	ui:common.on
+Off	Dansan	word	common	ui:common.off
+Settings	Dejinta	word	settings	ui:settings.title
+Language	Luqadda	word	settings	ui:settings.language
+Voice guidance	Hagid cod ah	phrase	settings	ui:settings.voice
+Map appearance	Muuqaalka khariidadda	phrase	settings	ui:settings.mapAppearance
+Privacy	Qarsoodinimada	word	settings	ui:settings.privacy
+Location and saved history	Goobta iyo taariikhda la keydiyay	phrase	settings	ui:settings.privacyHint
+Developer mode	Habka horumariyaha	phrase	settings	ui:settings.developer
+Help & map sources	Caawimaad & ilaha khariidadda	phrase	settings	ui:settings.help
+Coverage and credits	Baaxadda iyo mahadnaqa	phrase	settings	ui:settings.helpHint
+Account	Akoon	word	settings	ui:settings.account
+Signed in as {email}	Waxaad ku gashay {email}	phrase	settings	ui:settings.signedInAs
+Not signed in	Ma aadan gelin	phrase	settings	ui:settings.guest
+Magaalo · Made for getting around	Magaalo · Loo sameeyay socodka magaalada	phrase	settings	ui:settings.footer
+Clear saved history	Tirtir taariikhda la keydiyay	phrase	settings	ui:settings.clearHistory
+Saved history cleared.	Taariikhda la keydiyay waa la tirtiray.	sentence	settings	ui:settings.cleared
+Your location is used on this device to show where you are and to guide you. It is only sent when you choose to send a report, and then only the reported spot is stored. Reviews and reports are linked to your account so the community model can learn whose reports are reliable; other people only see combined alerts, never your name.	Goobtaada waxaa lagu isticmaalaa qalabkan si loo muujiyo halka aad joogto loona hago. Waxaa la diraa oo keliya marka aad doorato inaad warbixin dirto, markaas waxaa la keydiyaa oo keliya meesha la soo sheegay. Faallooyinka iyo warbixinnada waxay ku xiran yihiin akoonkaaga si nidaamka bulshadu u barto warbixinnada la isku hallayn karo; dadka kale waxay arkaan oo keliya digniinaha la isku daray, marna magacaaga.	sentence	privacy	ui:privacy.body
+Roads and buildings come from OpenStreetMap contributors (ODbL). Places also come from Overture Maps. District boundaries come from OCHA / HDX. Satellite imagery is Esri World Imagery. The street base map is Esri Light Gray Canvas. Routes are calculated by Valhalla and OSRM using OpenStreetMap data. Community alerts come from Magaalo users. Map data can be incomplete or out of date.	Waddooyinka iyo dhismayaasha waxay ka yimaadeen ka qaybgalayaasha OpenStreetMap (ODbL). Meelaha qaarkood waxay ka yimaadeen Overture Maps. Xuduudaha degmooyinka waxay ka yimaadeen OCHA / HDX. Sawirrada dayax-gacmeedka waa Esri World Imagery. Khariidadda salka ah waa Esri Light Gray Canvas. Jidadka waxaa xisaabiya Valhalla iyo OSRM iyagoo adeegsanaya xogta OpenStreetMap. Digniinaha bulshada waxay ka yimaadeen isticmaalayaasha Magaalo. Xogta khariidaddu waxay noqon kartaa mid aan dhammaystirnayn ama duugowday.	sentence	help	ui:help.body
+Selected	La doortay	word	language	ui:language.selected
+You can change this any time.	Waad beddeli kartaa mar kasta.	sentence	language	ui:language.hint
+If your phone has no Somali voice, spoken directions use English.	Haddii taleefankaagu aanu lahayn cod Soomaali ah, tilmaamaha codka waxay noqonayaan Ingiriis.	sentence	language	ui:language.voiceNote
+On · this device only	Shidan · qalabkan oo keliya	phrase	dev	ui:dev.onDevice
+Optional tools for testing the app.	Qalab ikhtiyaari ah oo lagu tijaabiyo app-ka.	sentence	dev	ui:dev.optional
+GPS diagnostics	Baaritaanka GPS	phrase	dev	ui:dev.gps
+Accuracy, heading and fix	Saxnaanta, jihada iyo goobta	phrase	dev	ui:dev.gpsHint
+Map debugging	Baaritaanka khariidadda	phrase	dev	ui:dev.mapDebug
+Tile boundaries and map center	Xuduudaha tile-yada iyo bartamaha khariidadda	phrase	dev	ui:dev.mapDebugHint
+Navigation simulation	Jilitaanka hagidda	phrase	dev	ui:dev.simulate
+Test a route on this device	Ku tijaabi jid qalabkan	phrase	dev	ui:dev.simulateHint
+Connection diagnostics	Baaritaanka isku xirka	phrase	dev	ui:dev.connection
+Sync status and errors	Xaaladda isku xirka iyo khaladaadka	phrase	dev	ui:dev.connectionHint
+Simulated trips do not send reports or reviews.	Safarrada la jilay ma diraan warbixinno ama faallooyin.	sentence	dev	ui:dev.footer
+Run checks	Samee baaritaan	phrase	dev	ui:dev.check
+Map details	Faahfaahinta khariidadda	phrase	layers	ui:layers.title
+Street	Waddo	word	layers	ui:layers.street
+Satellite	Dayax-gacmeed	word	layers	ui:layers.satellite
+Districts	Degmooyinka	word	layers	ui:layers.districts
+Buildings	Dhismayaasha	word	layers	ui:layers.buildings
+Road names	Magacyada waddooyinka	phrase	layers	ui:layers.roadNames
+Transport	Gaadiidka	word	layers	ui:layers.transport
+Community reports	Warbixinnada bulshada	phrase	layers	ui:layers.reports
+You're offline	Internet ma jiro	phrase	offline	ui:offline.title
+Showing the last saved map.	Waxaa la muujinayaa khariidaddii ugu dambeysay ee la keydiyay.	sentence	offline	ui:offline.hint
+Find nearby stops and routes.	Hel boosteejooyinka iyo jidadka kuu dhow.	sentence	transport	ui:transport.hint
+No verified transport routes yet. They will appear here when operators add them.	Weli ma jiraan jidad gaadiid oo la xaqiijiyay. Halkan ayay ka muuqan doonaan marka hawl-wadeennadu ku daraan.	sentence	transport	ui:transport.empty
+{n} stops	{n} boosteejo	phrase	transport	ui:transport.stops
+Tap a district to see it on the map.	Taabo degmo si aad ugu aragto khariidadda.	sentence	districts	ui:districts.hint
+Sign in	Gal	phrase	account	ui:account.signIn
+Create account	Samee akoon	phrase	account	ui:account.signUp
+Email	Iimayl	word	account	ui:account.email
+Password	Furaha sirta	word	account	ui:account.password
+Sign out	Ka bax	phrase	account	ui:account.signOut
+Check your email to confirm your account, then sign in.	Hubi iimaylkaaga si aad u xaqiijiso akoonkaaga, kadibna gal.	sentence	account	ui:account.checkEmail
+Reporter trust	Kalsoonida warbixiyaha	phrase	account	ui:account.trust
+Grows when your reports match what others see.	Way korodhaa marka warbixinnadaadu la mid noqdaan waxa dadka kale arkaan.	sentence	account	ui:account.trustHint
+New here? Create an account	Cusub? Samee akoon	phrase	account	ui:account.toSignUp
+Already have an account? Sign in	Akoon ma leedahay? Gal	phrase	account	ui:account.toSignIn
+An account lets you send reports and reviews.	Akoon wuxuu kuu oggolaanayaa inaad dirto warbixinno iyo faallooyin.	sentence	account	ui:account.why
+Your reports	Warbixinnadaada	phrase	account	ui:account.reports
+Your reviews	Faallooyinkaaga	phrase	account	ui:account.reviews
+Turn left	Bidix u leexo	phrase	turn	ui:turn.left
+Turn right	Midig u leexo	phrase	turn	ui:turn.right
+Bear left	Wax yar bidix u leexo	phrase	turn	ui:turn.slightLeft
+Bear right	Wax yar midig u leexo	phrase	turn	ui:turn.slightRight
+Turn sharp left	Si xoog leh bidix ugu leexo	phrase	turn	ui:turn.sharpLeft
+Turn sharp right	Si xoog leh midig ugu leexo	phrase	turn	ui:turn.sharpRight
+Make a U-turn	Dib u soo wareeg	phrase	turn	ui:turn.uturn
+Go straight	Toos u soco	phrase	turn	ui:turn.straight
+Head {dir}	{dir} u soco	phrase	instr	ui:instr.depart
+Head {dir} on {street}	{dir} u soco adigoo maraya {street}	phrase	instr	ui:instr.departOn
+{turn} onto {street}	{turn} oo gal {street}	phrase	instr	ui:instr.turnOnto
+Continue	Sii soco	word	instr	ui:instr.continue
+Continue on {street}	Ku sii soco {street}	phrase	instr	ui:instr.continueOn
+At the roundabout, take the {nth} exit	Wareegga, ka bax baxitaanka {nth}	phrase	instr	ui:instr.roundabout
+At the roundabout, take the {nth} exit onto {street}	Wareegga, ka bax baxitaanka {nth} oo gal {street}	phrase	instr	ui:instr.roundaboutOnto
+Keep left	Dhanka bidix ku sii soco	phrase	instr	ui:instr.keepLeft
+Keep right	Dhanka midig ku sii soco	phrase	instr	ui:instr.keepRight
+Merge	Ku biir waddada	word	instr	ui:instr.merge
+You have arrived	Waad gaartay	phrase	instr	ui:instr.arrive
+Your destination is on the left	Meesha aad u socoto waxay ku taal dhanka bidix	phrase	instr	ui:instr.arriveLeft
+Your destination is on the right	Meesha aad u socoto waxay ku taal dhanka midig	phrase	instr	ui:instr.arriveRight
+In {distance}, {instruction}	{distance} kadib, {instruction}	phrase	instr	ui:instr.inDistance
+Follow the highlighted route	Raac jidka la calaamadeeyay	phrase	instr	ui:instr.follow
+first	koowaad	word	ordinal	ui:ordinal.1
+second	labaad	word	ordinal	ui:ordinal.2
+third	saddexaad	word	ordinal	ui:ordinal.3
+fourth	afraad	word	ordinal	ui:ordinal.4
+fifth	shanaad	word	ordinal	ui:ordinal.5
+sixth	lixaad	word	ordinal	ui:ordinal.6
+north	Waqooyi	word	dir	ui:dir.north
+northeast	Waqooyi-bari	word	dir	ui:dir.northeast
+east	Bari	word	dir	ui:dir.east
+southeast	Koonfur-bari	word	dir	ui:dir.southeast
+south	Koonfur	word	dir	ui:dir.south
+southwest	Koonfur-galbeed	word	dir	ui:dir.southwest
+west	Galbeed	word	dir	ui:dir.west
+northwest	Waqooyi-galbeed	word	dir	ui:dir.northwest
+{n} m	{n} m	phrase	unit	ui:unit.m
+{n} km	{n} km	phrase	unit	ui:unit.km
+{n} meters	{n} mitir	phrase	speak	ui:speak.m
+{n} kilometers	{n} kiiloomitir	phrase	speak	ui:speak.km
+just now	hadda	phrase	time	ui:time.justNow
+{n} min ago	{n} daqiiqo kahor	phrase	time	ui:time.minAgo
+{n} h ago	{n} saacadood kahor	phrase	time	ui:time.hAgo
+{n} days ago	{n} maalmood kahor	phrase	time	ui:time.dAgo
+road	waddo	word	navigation	vocabulary
+street	jid	word	navigation	vocabulary
+main road	waddada weyn	phrase	navigation	vocabulary
+roundabout	wareeg	word	navigation	vocabulary
+junction	isgoys	word	navigation	vocabulary
+intersection	isgoys	word	navigation	vocabulary
+traffic light	nalka taraafikada	phrase	navigation	vocabulary
+bridge	buundo	word	navigation	vocabulary
+left	bidix	word	navigation	vocabulary
+right	midig	word	navigation	vocabulary
+straight	toos	word	navigation	vocabulary
+ahead	hore	word	navigation	vocabulary
+behind	gadaal	word	navigation	vocabulary
+near	u dhow	word	navigation	vocabulary
+far	fog	word	navigation	vocabulary
+north	waqooyi	word	direction	vocabulary
+south	koonfur	word	direction	vocabulary
+east	bari	word	direction	vocabulary
+west	galbeed	word	direction	vocabulary
+map	khariidad	word	app	vocabulary
+route	jid	word	navigation	vocabulary
+directions	tilmaamo	word	navigation	vocabulary
+destination	meesha aad u socoto	phrase	navigation	vocabulary
+start	bilow	word	app	vocabulary
+stop	jooji	word	app	vocabulary
+end	dhammee	word	app	vocabulary
+search	raadi	word	app	vocabulary
+save	keydi	word	app	vocabulary
+report	warbixin	word	app	vocabulary
+review	faallo	word	app	vocabulary
+suggestion	soo jeedin	word	app	vocabulary
+language	luqad	word	app	vocabulary
+settings	dejin	word	app	vocabulary
+account	akoon	word	app	vocabulary
+location	goob	word	navigation	vocabulary
+my location	goobtayda	phrase	navigation	vocabulary
+minute	daqiiqo	word	time	vocabulary
+minutes	daqiiqo	word	time	vocabulary
+hour	saacad	word	time	vocabulary
+hours	saacadood	word	time	vocabulary
+today	maanta	word	time	vocabulary
+now	hadda	word	time	vocabulary
+meter	mitir	word	unit	vocabulary
+meters	mitir	word	unit	vocabulary
+kilometer	kiiloomitir	word	unit	vocabulary
+kilometers	kiiloomitir	word	unit	vocabulary
+car	baabuur	word	transport	vocabulary
+bus	bas	word	transport	vocabulary
+minibus	baabuur yar oo rakaab	phrase	transport	vocabulary
+taxi	tagsi	word	transport	vocabulary
+bajaj	bajaaj	word	transport	vocabulary
+bicycle	baaskiil	word	transport	vocabulary
+on foot	lug	phrase	transport	vocabulary
+walking	socod lug ah	phrase	transport	vocabulary
+driving	wadid baabuur	phrase	transport	vocabulary
+bus stop	boosteejada baska	phrase	transport	vocabulary
+petrol station	kaalinta shidaalka	phrase	place	vocabulary
+market	suuq	word	place	vocabulary
+shop	dukaan	word	place	vocabulary
+restaurant	makhaayad	word	place	vocabulary
+cafe	maqaaxi	word	place	vocabulary
+hotel	hoteel	word	place	vocabulary
+hospital	isbitaal	word	place	vocabulary
+clinic	rug caafimaad	phrase	place	vocabulary
+pharmacy	farmashiye	word	place	vocabulary
+mosque	masjid	word	place	vocabulary
+school	dugsi	word	place	vocabulary
+university	jaamacad	word	place	vocabulary
+bank	bangi	word	place	vocabulary
+police station	saldhigga booliska	phrase	place	vocabulary
+airport	garoonka diyaaradaha	phrase	place	vocabulary
+port	dekedda	word	place	vocabulary
+beach	xeeb	word	place	vocabulary
+park	beer	word	place	vocabulary
+stadium	garoonka kubadda	phrase	place	vocabulary
+ministry	wasaarad	word	place	vocabulary
+office	xafiis	word	place	vocabulary
+building	dhismo	word	place	vocabulary
+house	guri	word	place	vocabulary
+home	guriga	word	place	vocabulary
+work	shaqada	word	place	vocabulary
+district	degmo	word	place	vocabulary
+neighborhood	xaafad	word	place	vocabulary
+city	magaalo	word	place	vocabulary
+closed	xiran	word	condition	vocabulary
+open	furan	word	condition	vocabulary
+road closed	waddo xiran	phrase	condition	vocabulary
+road open	waddo furan	phrase	condition	vocabulary
+traffic	ciriiri	word	condition	vocabulary
+heavy traffic	ciriiri baabuur	phrase	condition	vocabulary
+flood	daad	word	condition	vocabulary
+flooding	daad	word	condition	vocabulary
+hazard	khatar	word	condition	vocabulary
+accident	shil	word	condition	vocabulary
+checkpoint	baaritaan	word	condition	vocabulary
+construction	dhismo socda	phrase	condition	vocabulary
+yes	haa	word	common	vocabulary
+no	maya	word	common	vocabulary
+thank you	mahadsanid	phrase	common	vocabulary
+please	fadlan	word	common	vocabulary
+help	caawimaad	word	common	vocabulary
+error	khalad	word	common	vocabulary
+try again	isku day mar kale	phrase	common	vocabulary
+Turn left at the roundabout.	Wareegga bidix uga leexo.	sentence	navigation	vocabulary
+Turn right at the next junction.	Isgoyska xiga midig uga leexo.	sentence	navigation	vocabulary
+Go straight for two kilometers.	Toos u soco laba kiiloomitir.	sentence	navigation	vocabulary
+Make a U-turn when possible.	Dib u soo wareeg marka ay suurtagal tahay.	sentence	navigation	vocabulary
+Your destination is on the right.	Meesha aad u socoto waxay ku taal dhanka midig.	sentence	navigation	vocabulary
+You have arrived at your destination.	Waxaad gaartay meeshii aad u socotay.	sentence	navigation	vocabulary
+The road ahead is closed.	Waddada hortaada ah way xiran tahay.	sentence	condition	vocabulary
+The road is open again.	Waddadu mar kale way furan tahay.	sentence	condition	vocabulary
+There is heavy traffic near the market.	Ciriiri baabuur ayaa ka jira agagaarka suuqa.	sentence	condition	vocabulary
+This building exists.	Dhismahan wuu jiraa.	sentence	condition	vocabulary
+This building does not exist.	Dhismahan ma jiro.	sentence	condition	vocabulary
+Several people reported this road as closed.	Dad badan ayaa soo sheegay in waddadan xiran tahay.	sentence	condition	vocabulary
+A new route avoids the closed road.	Jid cusub ayaa ka leexanaya waddada xiran.	sentence	navigation	vocabulary
+Where is the nearest hospital?	Xaggee buu ku yaal isbitaalka ugu dhow?	sentence	question	vocabulary
+How far is the airport?	Intee buu u jiraa garoonka diyaaradaha?	sentence	question	vocabulary
+How long will it take?	Intee in le'eg ayay qaadan doontaa?	sentence	question	vocabulary
+Is this road open?	Waddadani ma furan tahay?	sentence	question	vocabulary
+Which way to Bakaaraha Market?	Xaggee laga maraa Suuqa Bakaaraha?	sentence	question	vocabulary
+I want to go to Liido Beach.	Waxaan rabaa inaan aado Xeebta Liido.	sentence	request	vocabulary
+Take me home.	Gurigayga i geey.	sentence	request	vocabulary
+Show me the map.	I tus khariidadda.	sentence	request	vocabulary
+Please rate your trip.	Fadlan qiimee safarkaaga.	sentence	feedback	vocabulary
+The directions were good.	Tilmaamuhu way wanaagsanaayeen.	sentence	feedback	vocabulary
+The directions were wrong.	Tilmaamuhu way khaldanaayeen.	sentence	feedback	vocabulary
+Thank you for your report.	Mahadsanid warbixintaada.	sentence	feedback	vocabulary
+Your location is outside Mogadishu.	Goobtaadu waxay ka baxsan tahay Muqdisho.	sentence	status	vocabulary
+You are offline.	Internet ma jiro.	sentence	status	vocabulary
+Waiting for GPS.	Waxaa la sugayaa GPS.	sentence	status	vocabulary
+Finding a new route.	Jid cusub ayaa la raadinayaa.	sentence	status	vocabulary
+Turn left onto Wadada Maka Al-Mukarama	Bidix u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn left onto Wadada Maka Al-Mukarama	100 mitir kadib, bidix u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+In 300 meters, turn left onto Wadada Maka Al-Mukarama	300 mitir kadib, bidix u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+Turn right onto Wadada Maka Al-Mukarama	Midig u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn right onto Wadada Maka Al-Mukarama	100 mitir kadib, midig u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+In 300 meters, turn right onto Wadada Maka Al-Mukarama	300 mitir kadib, midig u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+Bear left onto Wadada Maka Al-Mukarama	Wax yar bidix u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear left onto Wadada Maka Al-Mukarama	100 mitir kadib, wax yar bidix u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+In 300 meters, bear left onto Wadada Maka Al-Mukarama	300 mitir kadib, wax yar bidix u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+Bear right onto Wadada Maka Al-Mukarama	Wax yar midig u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear right onto Wadada Maka Al-Mukarama	100 mitir kadib, wax yar midig u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+In 300 meters, bear right onto Wadada Maka Al-Mukarama	300 mitir kadib, wax yar midig u leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+Turn sharp left onto Wadada Maka Al-Mukarama	Si xoog leh bidix ugu leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp left onto Wadada Maka Al-Mukarama	100 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp left onto Wadada Maka Al-Mukarama	300 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+Turn sharp right onto Wadada Maka Al-Mukarama	Si xoog leh midig ugu leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp right onto Wadada Maka Al-Mukarama	100 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp right onto Wadada Maka Al-Mukarama	300 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.inDistance
+Continue on Wadada Maka Al-Mukarama	Ku sii soco Wadada Maka Al-Mukarama	sentence	navigation	template:instr.continueOn
+At the roundabout, take the first exit onto Wadada Maka Al-Mukarama	Wareegga, ka bax baxitaanka koowaad oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the second exit onto Wadada Maka Al-Mukarama	Wareegga, ka bax baxitaanka labaad oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the third exit onto Wadada Maka Al-Mukarama	Wareegga, ka bax baxitaanka saddexaad oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the fourth exit onto Wadada Maka Al-Mukarama	Wareegga, ka bax baxitaanka afraad oo gal Wadada Maka Al-Mukarama	sentence	navigation	template:instr.roundaboutOnto
+Turn left onto Wadada Liido	Bidix u leexo oo gal Wadada Liido	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn left onto Wadada Liido	100 mitir kadib, bidix u leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+In 300 meters, turn left onto Wadada Liido	300 mitir kadib, bidix u leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+Turn right onto Wadada Liido	Midig u leexo oo gal Wadada Liido	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn right onto Wadada Liido	100 mitir kadib, midig u leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+In 300 meters, turn right onto Wadada Liido	300 mitir kadib, midig u leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+Bear left onto Wadada Liido	Wax yar bidix u leexo oo gal Wadada Liido	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear left onto Wadada Liido	100 mitir kadib, wax yar bidix u leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+In 300 meters, bear left onto Wadada Liido	300 mitir kadib, wax yar bidix u leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+Bear right onto Wadada Liido	Wax yar midig u leexo oo gal Wadada Liido	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear right onto Wadada Liido	100 mitir kadib, wax yar midig u leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+In 300 meters, bear right onto Wadada Liido	300 mitir kadib, wax yar midig u leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+Turn sharp left onto Wadada Liido	Si xoog leh bidix ugu leexo oo gal Wadada Liido	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp left onto Wadada Liido	100 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp left onto Wadada Liido	300 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+Turn sharp right onto Wadada Liido	Si xoog leh midig ugu leexo oo gal Wadada Liido	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp right onto Wadada Liido	100 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp right onto Wadada Liido	300 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Liido	sentence	navigation	template:instr.inDistance
+Continue on Wadada Liido	Ku sii soco Wadada Liido	sentence	navigation	template:instr.continueOn
+At the roundabout, take the first exit onto Wadada Liido	Wareegga, ka bax baxitaanka koowaad oo gal Wadada Liido	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the second exit onto Wadada Liido	Wareegga, ka bax baxitaanka labaad oo gal Wadada Liido	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the third exit onto Wadada Liido	Wareegga, ka bax baxitaanka saddexaad oo gal Wadada Liido	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the fourth exit onto Wadada Liido	Wareegga, ka bax baxitaanka afraad oo gal Wadada Liido	sentence	navigation	template:instr.roundaboutOnto
+Turn left onto Wadada Wadnaha	Bidix u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn left onto Wadada Wadnaha	100 mitir kadib, bidix u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+In 300 meters, turn left onto Wadada Wadnaha	300 mitir kadib, bidix u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+Turn right onto Wadada Wadnaha	Midig u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn right onto Wadada Wadnaha	100 mitir kadib, midig u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+In 300 meters, turn right onto Wadada Wadnaha	300 mitir kadib, midig u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+Bear left onto Wadada Wadnaha	Wax yar bidix u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear left onto Wadada Wadnaha	100 mitir kadib, wax yar bidix u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+In 300 meters, bear left onto Wadada Wadnaha	300 mitir kadib, wax yar bidix u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+Bear right onto Wadada Wadnaha	Wax yar midig u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear right onto Wadada Wadnaha	100 mitir kadib, wax yar midig u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+In 300 meters, bear right onto Wadada Wadnaha	300 mitir kadib, wax yar midig u leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+Turn sharp left onto Wadada Wadnaha	Si xoog leh bidix ugu leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp left onto Wadada Wadnaha	100 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp left onto Wadada Wadnaha	300 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+Turn sharp right onto Wadada Wadnaha	Si xoog leh midig ugu leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp right onto Wadada Wadnaha	100 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp right onto Wadada Wadnaha	300 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Wadnaha	sentence	navigation	template:instr.inDistance
+Continue on Wadada Wadnaha	Ku sii soco Wadada Wadnaha	sentence	navigation	template:instr.continueOn
+At the roundabout, take the first exit onto Wadada Wadnaha	Wareegga, ka bax baxitaanka koowaad oo gal Wadada Wadnaha	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the second exit onto Wadada Wadnaha	Wareegga, ka bax baxitaanka labaad oo gal Wadada Wadnaha	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the third exit onto Wadada Wadnaha	Wareegga, ka bax baxitaanka saddexaad oo gal Wadada Wadnaha	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the fourth exit onto Wadada Wadnaha	Wareegga, ka bax baxitaanka afraad oo gal Wadada Wadnaha	sentence	navigation	template:instr.roundaboutOnto
+Turn left onto Wadada Afgooye	Bidix u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn left onto Wadada Afgooye	100 mitir kadib, bidix u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+In 300 meters, turn left onto Wadada Afgooye	300 mitir kadib, bidix u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+Turn right onto Wadada Afgooye	Midig u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn right onto Wadada Afgooye	100 mitir kadib, midig u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+In 300 meters, turn right onto Wadada Afgooye	300 mitir kadib, midig u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+Bear left onto Wadada Afgooye	Wax yar bidix u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear left onto Wadada Afgooye	100 mitir kadib, wax yar bidix u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+In 300 meters, bear left onto Wadada Afgooye	300 mitir kadib, wax yar bidix u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+Bear right onto Wadada Afgooye	Wax yar midig u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear right onto Wadada Afgooye	100 mitir kadib, wax yar midig u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+In 300 meters, bear right onto Wadada Afgooye	300 mitir kadib, wax yar midig u leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+Turn sharp left onto Wadada Afgooye	Si xoog leh bidix ugu leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp left onto Wadada Afgooye	100 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp left onto Wadada Afgooye	300 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+Turn sharp right onto Wadada Afgooye	Si xoog leh midig ugu leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp right onto Wadada Afgooye	100 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp right onto Wadada Afgooye	300 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Afgooye	sentence	navigation	template:instr.inDistance
+Continue on Wadada Afgooye	Ku sii soco Wadada Afgooye	sentence	navigation	template:instr.continueOn
+At the roundabout, take the first exit onto Wadada Afgooye	Wareegga, ka bax baxitaanka koowaad oo gal Wadada Afgooye	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the second exit onto Wadada Afgooye	Wareegga, ka bax baxitaanka labaad oo gal Wadada Afgooye	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the third exit onto Wadada Afgooye	Wareegga, ka bax baxitaanka saddexaad oo gal Wadada Afgooye	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the fourth exit onto Wadada Afgooye	Wareegga, ka bax baxitaanka afraad oo gal Wadada Afgooye	sentence	navigation	template:instr.roundaboutOnto
+Turn left onto Wadada Sodonka	Bidix u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn left onto Wadada Sodonka	100 mitir kadib, bidix u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+In 300 meters, turn left onto Wadada Sodonka	300 mitir kadib, bidix u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+Turn right onto Wadada Sodonka	Midig u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn right onto Wadada Sodonka	100 mitir kadib, midig u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+In 300 meters, turn right onto Wadada Sodonka	300 mitir kadib, midig u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+Bear left onto Wadada Sodonka	Wax yar bidix u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear left onto Wadada Sodonka	100 mitir kadib, wax yar bidix u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+In 300 meters, bear left onto Wadada Sodonka	300 mitir kadib, wax yar bidix u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+Bear right onto Wadada Sodonka	Wax yar midig u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear right onto Wadada Sodonka	100 mitir kadib, wax yar midig u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+In 300 meters, bear right onto Wadada Sodonka	300 mitir kadib, wax yar midig u leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+Turn sharp left onto Wadada Sodonka	Si xoog leh bidix ugu leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp left onto Wadada Sodonka	100 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp left onto Wadada Sodonka	300 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+Turn sharp right onto Wadada Sodonka	Si xoog leh midig ugu leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp right onto Wadada Sodonka	100 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp right onto Wadada Sodonka	300 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Sodonka	sentence	navigation	template:instr.inDistance
+Continue on Wadada Sodonka	Ku sii soco Wadada Sodonka	sentence	navigation	template:instr.continueOn
+At the roundabout, take the first exit onto Wadada Sodonka	Wareegga, ka bax baxitaanka koowaad oo gal Wadada Sodonka	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the second exit onto Wadada Sodonka	Wareegga, ka bax baxitaanka labaad oo gal Wadada Sodonka	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the third exit onto Wadada Sodonka	Wareegga, ka bax baxitaanka saddexaad oo gal Wadada Sodonka	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the fourth exit onto Wadada Sodonka	Wareegga, ka bax baxitaanka afraad oo gal Wadada Sodonka	sentence	navigation	template:instr.roundaboutOnto
+Turn left onto Wadada Industriyaalka	Bidix u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn left onto Wadada Industriyaalka	100 mitir kadib, bidix u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+In 300 meters, turn left onto Wadada Industriyaalka	300 mitir kadib, bidix u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+Turn right onto Wadada Industriyaalka	Midig u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn right onto Wadada Industriyaalka	100 mitir kadib, midig u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+In 300 meters, turn right onto Wadada Industriyaalka	300 mitir kadib, midig u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+Bear left onto Wadada Industriyaalka	Wax yar bidix u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear left onto Wadada Industriyaalka	100 mitir kadib, wax yar bidix u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+In 300 meters, bear left onto Wadada Industriyaalka	300 mitir kadib, wax yar bidix u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+Bear right onto Wadada Industriyaalka	Wax yar midig u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.turnOnto
+In 100 meters, bear right onto Wadada Industriyaalka	100 mitir kadib, wax yar midig u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+In 300 meters, bear right onto Wadada Industriyaalka	300 mitir kadib, wax yar midig u leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+Turn sharp left onto Wadada Industriyaalka	Si xoog leh bidix ugu leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp left onto Wadada Industriyaalka	100 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp left onto Wadada Industriyaalka	300 mitir kadib, si xoog leh bidix ugu leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+Turn sharp right onto Wadada Industriyaalka	Si xoog leh midig ugu leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.turnOnto
+In 100 meters, turn sharp right onto Wadada Industriyaalka	100 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+In 300 meters, turn sharp right onto Wadada Industriyaalka	300 mitir kadib, si xoog leh midig ugu leexo oo gal Wadada Industriyaalka	sentence	navigation	template:instr.inDistance
+Continue on Wadada Industriyaalka	Ku sii soco Wadada Industriyaalka	sentence	navigation	template:instr.continueOn
+At the roundabout, take the first exit onto Wadada Industriyaalka	Wareegga, ka bax baxitaanka koowaad oo gal Wadada Industriyaalka	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the second exit onto Wadada Industriyaalka	Wareegga, ka bax baxitaanka labaad oo gal Wadada Industriyaalka	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the third exit onto Wadada Industriyaalka	Wareegga, ka bax baxitaanka saddexaad oo gal Wadada Industriyaalka	sentence	navigation	template:instr.roundaboutOnto
+At the roundabout, take the fourth exit onto Wadada Industriyaalka	Wareegga, ka bax baxitaanka afraad oo gal Wadada Industriyaalka	sentence	navigation	template:instr.roundaboutOnto
+Head north	Waqooyi u soco	sentence	navigation	template:instr.depart
+Head northeast	Waqooyi-bari u soco	sentence	navigation	template:instr.depart
+Head east	Bari u soco	sentence	navigation	template:instr.depart
+Head southeast	Koonfur-bari u soco	sentence	navigation	template:instr.depart
+Head south	Koonfur u soco	sentence	navigation	template:instr.depart
+Head southwest	Koonfur-galbeed u soco	sentence	navigation	template:instr.depart
+Head west	Galbeed u soco	sentence	navigation	template:instr.depart
+Head northwest	Waqooyi-galbeed u soco	sentence	navigation	template:instr.depart
+Reported by 2 people · 4 min ago	2 qof ayaa soo sheegay · 4 daqiiqo kahor	sentence	condition	template:closure.reportedBy
+Reported by 3 people · 4 min ago	3 qof ayaa soo sheegay · 4 daqiiqo kahor	sentence	condition	template:closure.reportedBy
+Reported by 5 people · 4 min ago	5 qof ayaa soo sheegay · 4 daqiiqo kahor	sentence	condition	template:closure.reportedBy
+Reported by 10 people · 4 min ago	10 qof ayaa soo sheegay · 4 daqiiqo kahor	sentence	condition	template:closure.reportedBy
