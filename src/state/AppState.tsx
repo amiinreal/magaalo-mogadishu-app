@@ -4,13 +4,17 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import type { Place } from '../lib/search';
 import { supabase } from '../lib/supabase';
 
+// Map layers mirror the website's "Map layers" panel.
 export type Settings = {
   voice: boolean;
   basemap: 'street' | 'satellite';
-  districts: boolean;
+  roads: boolean;
   buildings: boolean;
-  roadNames: boolean;
+  places: boolean;
+  community: boolean;
   transport: boolean;
+  districts: boolean;
+  districtOpacity: number;
   reports: boolean;
   developer: boolean;
   simulate: boolean;
@@ -20,10 +24,10 @@ export type Settings = {
 export type Saved = { home?: Place; work?: Place; places: Place[]; recents: Place[] };
 
 const DEFAULT_SETTINGS: Settings = {
-  voice: true, basemap: 'street', districts: false, buildings: true, roadNames: true, transport: false,
-  reports: true, developer: false, simulate: false, mapDebug: false,
+  voice: true, basemap: 'satellite', roads: true, buildings: true, places: true, community: true, transport: false,
+  districts: false, districtOpacity: 24, reports: true, developer: false, simulate: false, mapDebug: false,
 };
-const SETTINGS_KEY = 'magaalo.settings.v1';
+const SETTINGS_KEY = 'magaalo.settings.v2';
 const SAVED_KEY = 'magaalo.saved.v1';
 
 type AppContext = {

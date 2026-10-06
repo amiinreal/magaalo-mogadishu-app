@@ -26,7 +26,8 @@ export default function SettingsScreen() {
       <ToggleRow icon="code-slash-outline" label={t('settings.developer')} hint={settings.developer ? t('dev.onDevice') : t('common.off')}
         value={settings.developer} onChange={developer => { updateSettings({ developer }); if (developer) router.push('/developer'); }} />
       {settings.developer ? <Row icon="construct-outline" label={t('dev.title')} hint={t('dev.optional')} onPress={() => router.push('/developer')} /> : null}
-      <Row icon="help-circle-outline" label={t('settings.help')} hint={t('settings.helpHint')} onPress={() => router.push('/info?topic=help')} />
+      <Row icon="create-outline" label={t('improve.mine')} hint={t('improve.reviewed')} onPress={() => router.push('/suggestions')} />
+      <Row icon="help-circle-outline" label={t('sources.title')} hint={t('settings.helpHint')} onPress={() => router.push('/sources')} />
       <Text style={[styles.rowHint, { marginTop: 14 }]}>{t('settings.footer')}</Text>
     </Page>
   );

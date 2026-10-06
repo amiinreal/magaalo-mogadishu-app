@@ -9,18 +9,38 @@ It uses the same map data and Supabase project as the
 
 The app is for everyday users. Moderator, operator and map-editing tools stay on the website.
 
+## How it fits with the Magaalo Atlas website
+
+The website is the app's **data and routing service** — the app uses the same map and the same features:
+
+| | Source |
+| --- | --- |
+| Base maps | Same as the website: **Esri World Imagery** (default) and **OpenStreetMap** street tiles |
+| Roads, buildings, road names | The website's vector tiles (Supabase storage, `/data/tiles` fallback), drawn with the website's renderer |
+| Businesses & places | `/data/atlas.json` place records (2,820) and `/data/search-index.json` (3,063 names), plus the website's `/api/search` (Nominatim) |
+| Districts | `/data/districts.geojson` with the website's colours and opacity |
+| Directions | `/api/route` — **OSRM** for driving, walking and cycling; community-confirmed closures avoided |
+| Road access points | `/data/network/*` from the road-network model (computed on the device until the website is republished) |
+| Contributions | `/api/suggestions` (street name, missing building outline, business, bus/taxi stop, road problem) → the website's moderation queue; `/api/me/suggestions` |
+| Community alerts | `/api/alerts`, `/api/reports`, `/api/reviews`, `/api/rating` (+ Supabase Realtime for live updates) |
+| Approved community details, transport | `/api/suggestions` (approved), `/api/transport` |
+
+Signed-in requests send the Supabase access token as `Authorization: Bearer …`, as described in the website's `docs/mobile.md`. If a newer website endpoint isn't deployed yet, the app falls back to the same Supabase tables / OSRM servers so it keeps working.
+
 ## What it does
 
-- **Explore:** the Atlas map shows 19,178 road segments, 470,236 building footprints and road names. You can use a street or satellite base, and add district, transport and community-report layers.
-- **Search:** the 3,000+ place index is cached on the phone for offline use. Somali words find English categories, so *suuq* finds markets and *isbitaal* finds hospitals. There are category chips, recent searches, and you can drop a pin by long-pressing or choosing a spot on the map.
-- **Directions:** routes for driving, walking and cycling, with alternatives and the arrival time. **Routes avoid road closures the community has confirmed.**
-- **Turn-by-turn guidance:** GPS following, spoken prompts, automatic rerouting when you leave the route, and the screen stays on while you navigate. If a closure is confirmed while you are driving, you see a "Road closed ahead · Continue +N min" card with the detour already calculated.
-- **Community reports:** one tap reports a road closed, a road open again, a place or building, heavy traffic, flooding or something else. While navigating, the report is sent at your current position. Otherwise you move a pin to the exact spot.
-- **Suggest a change:** tap any building or place and report *this place exists*, *this place doesn't exist*, or *add a missing place*.
-- **Review after arrival:** rate the directions with 1–5 stars, tick issues such as road closed, wrong turn or place missing, and add an optional comment.
-- **English first, Somali second:** every screen and spoken instruction is in both languages. You switch in Settings → Language. If the phone has no Somali voice, spoken prompts fall back to English.
-- **Saved places:** Home, Work and favourites, plus district explorer, city transport, offline banner, privacy, help and map credits.
-- **Developer mode:** GPS diagnostics, map debugging, connection checks, and a **navigation simulator** that drives any route at 2× speed. It works on an emulator with no GPS.
+- **Map** — the website's map: satellite or street, road network and names, building footprints from zoom 15, business/place dots with names, reviewed community details, live transport, districts, community alerts. Tap any road, building or place for details (address, phone, website, opening hours, source).
+- **Search** — offline-cached index, Somali ↔ English synonyms (*suuq* → markets, *isbitaal* → hospitals), category chips, Discover cards, long-press to drop a pin.
+- **Directions** — OSRM routes for driving, walking and cycling with alternatives; the route ends at the place's **access point on the road network** and a dashed line walks the last metres to the door.
+- **Turn-by-turn** — GPS following, spoken prompts (Somali or English), rerouting, keep-awake, closure-ahead detours, and a developer **navigation simulator**.
+- **Report** — road closed / open again, place or building, traffic, flooding, other; buildings: *exists* / *doesn't exist*. Combined into public alerts by the consensus model.
+- **Improve the map** — the website's moderated suggestions with drawing tools: draw a street, outline a missing building, drop a business or stop, mark a missing road connection. Track them in *My suggestions*.
+- **Review after arrival** — stars, issues, comment; *road was closed* and *place missing* also feed the alert model.
+- **English first, Somali second**, saved places, sources & coverage (including the road-network analysis), privacy, developer tools.
+
+## Road connections and the network model
+
+The atlas repo's `scripts/build-network.mjs` rebuilds the road graph from the same tiles, finds that 99.7% of road length is connected, recognises 438 likely missing connections with a self-supervised machine-learning model (reviewed by moderators before anything is published), and links all 470,220 buildings and 2,815 places to their nearest point on the connected road network. The app routes to those access points. Details are in the [atlas README](https://github.com/amiinreal/magaalo-mogadishu-atlas#road-network-community-alerts-and-the-mobile-app).
 
 ## How the community model works (machine learning)
 
@@ -44,13 +64,13 @@ Tested against the live database inside a rolled-back transaction:
 
 Reviews feed the model too. If you tick *Road was closed*, closure reports are created where you left the route. If you tick *Place missing*, a "doesn't exist" report is created at the destination.
 
-Confirmed closures become `exclude_polygons` for the Valhalla router. The guard trigger limits each user to 20 reports per hour and blocks duplicates within 40 m and 15 minutes. pg_cron re-runs the model every 10 minutes so old alerts fade.
+Confirmed closures are avoided by the website's `/api/route` (an OSRM alternative that misses them, else a Valhalla detour). The guard trigger limits each user to 20 reports per hour and blocks duplicates within 40 m and 15 minutes. pg_cron re-runs the model every 10 minutes so old alerts fade.
 
 ## Language corpus
 
-`corpus/en-so.tsv` is a parallel English → Somali corpus with **515 pairs**. Its columns are `english, somali, type, domain, source`. It is built from:
+`corpus/en-so.tsv` is a parallel English → Somali corpus with **597 pairs**. Its columns are `english, somali, type, domain, source`. It is built from:
 
-- every UI string (`src/i18n/en.json` ↔ `so.json`, 246 strings),
+- every UI string (`src/i18n/en.json` ↔ `so.json`, 330 strings),
 - the hand-written vocabulary and sentences in `corpus/vocabulary.tsv`, covering places, directions, conditions, questions and feedback,
 - navigation templates expanded with real Mogadishu street names, distances, ordinals and compass directions.
 
@@ -89,12 +109,11 @@ src/components/       MapView (Leaflet in a WebView), sheets matching the Figma 
 src/lib/              routing (Valhalla + OSRM fallback), guidance engine, search, community API, geo helpers
 src/i18n/             en.json / so.json and the translation provider
 src/vendor/leaflet.ts Leaflet inlined so the map shell works offline (npm run vendor:leaflet)
-supabase/migrations/  community reports, consensus model, reviews (already applied to the hosted project)
 corpus/               English → Somali corpus
 ```
 
 ## Data and credits
 
-Roads, buildings and names: © OpenStreetMap contributors (ODbL), prepared by the Atlas project. Places: OpenStreetMap and Overture Maps. Districts: OCHA / HDX (CC BY-IGO). Base maps: Esri Light Gray Canvas and Esri World Imagery. Routing: Valhalla (FOSSGIS server) with an OSRM demo-server fallback.
+Roads, buildings and names: © OpenStreetMap contributors (ODbL), prepared by the Atlas project. Places: OpenStreetMap and Overture Maps. Districts: OCHA / HDX (CC BY-IGO). Base maps: Esri World Imagery and OpenStreetMap tiles. Routing: OSRM (project demo and FOSSGIS car/foot/bike servers) through the Magaalo website; Valhalla only for closure detours.
 
-The public routing servers have fair-use limits. Self-host Valhalla before heavy production use. Map data can be incomplete or out of date.
+The public routing servers have fair-use limits; self-host OSRM before heavy production use. Database migrations live in the atlas repo (`supabase/migrations`). Map data can be incomplete or out of date.

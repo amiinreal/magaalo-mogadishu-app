@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Text, View } from 'react-native';
 import { Page } from '../components/Page';
 import { Button, Row, styles, ToggleRow } from '../components/ui';
-import { MAP_STORAGE, OSRM_URL, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, VALHALLA_URL } from '../config';
+import { ATLAS_WEBSITE, MAP_STORAGE, OSRM_SERVERS, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from '../config';
 import { useI18n } from '../i18n';
 import { useDeviceLocation } from '../lib/hooks';
 import { useApp } from '../state/AppState';
@@ -29,10 +29,11 @@ export default function DeveloperScreen() {
   const run = async () => {
     setRunning(true);
     setChecks(await Promise.all([
-      timed('Supabase API', () => fetch(`${SUPABASE_URL}/rest/v1/map_alerts?select=id&limit=1`, { headers: { apikey: SUPABASE_PUBLISHABLE_KEY } })),
+      timed('Magaalo website', () => fetch(`${ATLAS_WEBSITE}/api/health`)),
+      timed('Website routing (OSRM)', () => fetch(`${ATLAS_WEBSITE}/api/route?coordinates=45.318,2.046;45.32,2.05&mode=driving`)),
       timed('Map tiles', () => fetch(`${MAP_STORAGE}/districts.geojson`, { method: 'HEAD' })),
-      timed('Valhalla routing', () => fetch(`${VALHALLA_URL.replace('/route', '/status')}`)),
-      timed('OSRM routing', () => fetch(`${OSRM_URL}/driving/45.318,2.046;45.32,2.05?overview=false`)),
+      timed('Supabase API', () => fetch(`${SUPABASE_URL}/rest/v1/map_alerts?select=id&limit=1`, { headers: { apikey: SUPABASE_PUBLISHABLE_KEY } })),
+      timed('OSRM foot (direct)', () => fetch(`${OSRM_SERVERS.walking[0]}/45.318,2.046;45.32,2.05?overview=false`)),
     ]));
     setRunning(false);
   };

@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Linking, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { colors } from '../../config';
 import { formatAgo, useI18n, type StringKey } from '../../i18n';
 import { destinationRating, type MapAlert } from '../../lib/community';
@@ -34,8 +34,16 @@ export function placeSubtitle(place: Place, mogadishu: string) {
   return [capitalize(place.category), place.address || mogadishu].filter(Boolean).join(' · ');
 }
 
-export function ExploreSheet({ onLayout, onOpenPlace, onSaved, onPickHome, onPickWork }: SheetProps & {
+// The website's "Around the city · Discover" cards.
+const DISCOVER: { query: string; title: StringKey; hint: StringKey; icon: IconName }[] = [
+  { query: 'Liido Beach', title: 'discover.liido', hint: 'discover.liidoHint', icon: 'water-outline' },
+  { query: 'Bakaaraha Market', title: 'discover.bakaaraha', hint: 'discover.bakaarahaHint', icon: 'storefront-outline' },
+  { query: 'Aden Adde International Airport', title: 'discover.airport', hint: 'discover.airportHint', icon: 'airplane-outline' },
+];
+
+export function ExploreSheet({ onLayout, onOpenPlace, onSaved, onPickHome, onPickWork, onDiscover, onImprove }: SheetProps & {
   onOpenPlace: (p: Place) => void; onSaved: () => void; onPickHome: () => void; onPickWork: () => void;
+  onDiscover: (query: string) => void; onImprove: () => void;
 }) {
   const { t } = useI18n();
   const { saved } = useApp();
@@ -47,6 +55,18 @@ export function ExploreSheet({ onLayout, onOpenPlace, onSaved, onPickHome, onPic
       <Row icon="briefcase-outline" label={t('explore.work')} hint={saved.work?.name ?? t('explore.workHint')}
         onPress={() => (saved.work ? onOpenPlace(saved.work) : onPickWork())} />
       <Row icon="bookmark-outline" label={t('explore.saved')} hint={t('explore.savedHint')} onPress={onSaved} />
+      <Text style={[styles.rowHint, { marginTop: 6, letterSpacing: 1 }]}>{t('discover.title').toUpperCase()}</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingVertical: 8 }}>
+        {DISCOVER.map(d => (
+          <Pressable key={d.query} accessibilityRole="button" onPress={() => onDiscover(d.query)}
+            style={{ width: 150, padding: 12, borderRadius: 14, backgroundColor: colors.soft }}>
+            <Ionicons name={d.icon} size={20} color={colors.green} />
+            <Text style={[styles.rowLabel, { marginTop: 6 }]} numberOfLines={1}>{t(d.title)}</Text>
+            <Text style={styles.rowHint} numberOfLines={2}>{t(d.hint)}</Text>
+          </Pressable>
+        ))}
+      </ScrollView>
+      <Row icon="create-outline" label={t('improve.title')} hint={t('improve.hint')} onPress={onImprove} color={colors.blue} />
     </Sheet>
   );
 }
@@ -102,8 +122,10 @@ export function SearchSheet({ onLayout, initialQuery, near, onSelect, onChooseOn
   );
 }
 
-export function PlaceSheet({ onLayout, place, onDirections, onSuggest }: SheetProps & {
-  place: Place; onDirections: () => void; onSuggest: () => void;
+export type AccessInfo = { street: string | null; distance: number; source: 'network' | 'device' } | null;
+
+export function PlaceSheet({ onLayout, place, access, onDirections, onSuggest, onReportBuilding }: SheetProps & {
+  place: Place; access: AccessInfo | undefined; onDirections: () => void; onSuggest: () => void; onReportBuilding: (exists: boolean) => void;
 }) {
   const { t } = useI18n();
   const { isSaved, toggleSaved, setHome, setWork } = useApp();
@@ -113,25 +135,43 @@ export function PlaceSheet({ onLayout, place, onDirections, onSuggest }: SheetPr
     destinationRating(place.lat, place.lng).then(setRating).catch(() => {});
   }, [place.lat, place.lng]);
   const saved = isSaved(place);
+  const suggestLabel = place.kind === 'road' ? (place.name ? t('suggest.roadCorrection') : t('suggest.streetName')) : t('place.suggest');
   return (
     <Sheet onLayout={onLayout}>
-      <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-        <View style={{ flex: 1 }}>
-          <Title sub={placeSubtitle(place, t('common.mogadishu'))}>{place.name}</Title>
+      <ScrollView style={{ maxHeight: 420 }} keyboardShouldPersistTaps="handled">
+        <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+          <View style={{ flex: 1 }}>
+            <Title sub={placeSubtitle(place, t('common.mogadishu'))}>{place.name}</Title>
+          </View>
+          <Pressable accessibilityRole="button" accessibilityLabel={saved ? t('place.saved') : t('place.save')} onPress={() => toggleSaved(place)} hitSlop={10}>
+            <Ionicons name={saved ? 'bookmark' : 'bookmark-outline'} size={24} color={saved ? colors.blue : colors.ink} />
+          </Pressable>
         </View>
-        <Pressable accessibilityRole="button" accessibilityLabel={saved ? t('place.saved') : t('place.save')} onPress={() => toggleSaved(place)} hitSlop={10}>
-          <Ionicons name={saved ? 'bookmark' : 'bookmark-outline'} size={24} color={saved ? colors.blue : colors.ink} />
-        </Pressable>
-      </View>
-      <Text style={[styles.sub, { marginTop: -4, marginBottom: 12 }]}>
-        {rating ? t('place.rating', { rating: rating.average.toFixed(1), count: rating.reviews }) : t('place.noReviews')}
-      </Text>
-      <Button label={t('place.directions')} icon="navigate" onPress={onDirections} />
-      <Row icon="create-outline" label={t('place.suggest')} hint={t('place.suggestHint')} onPress={onSuggest} />
-      <View style={{ flexDirection: 'row', gap: 8 }}>
-        <Chip label={t('place.setHome')} icon="home-outline" onPress={() => setHome(place)} />
-        <Chip label={t('place.setWork')} icon="briefcase-outline" onPress={() => setWork(place)} />
-      </View>
+        <Text style={[styles.sub, { marginTop: -4, marginBottom: 8 }]}>
+          {rating ? t('place.rating', { rating: rating.average.toFixed(1), count: rating.reviews }) : t('place.noReviews')}
+        </Text>
+        {/* Where this place meets the road network: routes end here, then a short walk to the door. */}
+        {place.kind !== 'road' ? (
+          <Row icon="git-network-outline" label={access === undefined ? t('place.accessFinding') : access ? (access.street ? t('place.onStreet', { street: access.street }) : t('place.unnamedRoad')) : t('place.noAccess')}
+            hint={access ? t('place.accessHint', { m: access.distance }) : undefined} />
+        ) : null}
+        <Button label={t('place.directions')} icon="navigate" onPress={onDirections} />
+        {place.phone ? <Row icon="call-outline" label={place.phone} onPress={() => Linking.openURL(`tel:${place.phone!.replace(/[^\d+]/g, '')}`)} color={colors.blue} /> : null}
+        {place.website ? <Row icon="globe-outline" label={place.website.replace(/^https?:\/\//, '')} onPress={() => Linking.openURL(/^https?:/.test(place.website!) ? place.website! : `https://${place.website}`)} color={colors.blue} /> : null}
+        {place.openingHours ? <Row icon="time-outline" label={place.openingHours} /> : null}
+        <Row icon="create-outline" label={suggestLabel} hint={t('place.suggestHint')} onPress={onSuggest} />
+        {place.kind === 'building' ? (
+          <View style={{ flexDirection: 'row', gap: 8, marginBottom: 8 }}>
+            <Chip label={t('suggest.exists')} icon="checkmark" onPress={() => onReportBuilding(true)} />
+            <Chip label={t('suggest.notExists')} icon="close" onPress={() => onReportBuilding(false)} />
+          </View>
+        ) : null}
+        <View style={{ flexDirection: 'row', gap: 8 }}>
+          <Chip label={t('place.setHome')} icon="home-outline" onPress={() => setHome(place)} />
+          <Chip label={t('place.setWork')} icon="briefcase-outline" onPress={() => setWork(place)} />
+        </View>
+        {place.source ? <Text style={[styles.rowHint, { marginTop: 10 }]}>{place.source}</Text> : null}
+      </ScrollView>
     </Sheet>
   );
 }
@@ -164,11 +204,22 @@ export function LayersSheet({ onLayout, onClose }: SheetProps & { onClose: () =>
         <Chip label={t('layers.street')} icon="map-outline" active={settings.basemap === 'street'} onPress={() => updateSettings({ basemap: 'street' })} />
         <Chip label={t('layers.satellite')} icon="earth-outline" active={settings.basemap === 'satellite'} onPress={() => updateSettings({ basemap: 'satellite' })} />
       </View>
-      <ToggleRow icon="grid-outline" label={t('layers.districts')} value={settings.districts} onChange={v => updateSettings({ districts: v })} />
-      <ToggleRow icon="business-outline" label={t('layers.buildings')} value={settings.buildings} onChange={v => updateSettings({ buildings: v })} />
-      <ToggleRow icon="text-outline" label={t('layers.roadNames')} value={settings.roadNames} onChange={v => updateSettings({ roadNames: v })} />
-      <ToggleRow icon="bus-outline" label={t('layers.transport')} value={settings.transport} onChange={v => updateSettings({ transport: v })} />
-      <ToggleRow icon="flag-outline" label={t('layers.reports')} value={settings.reports} onChange={v => updateSettings({ reports: v })} />
+      <ScrollView style={{ maxHeight: 380 }}>
+        <ToggleRow icon="grid-outline" label={t('layers.districts')} hint={t('layers.districtsHint')} value={settings.districts} onChange={v => updateSettings({ districts: v })} />
+        {settings.districts ? (
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 30, marginBottom: 6, gap: 10 }}>
+            <Text style={[styles.rowHint, { flex: 1 }]}>{t('layers.intensity', { p: settings.districtOpacity })}</Text>
+            <Chip label="−" onPress={() => updateSettings({ districtOpacity: Math.max(0, settings.districtOpacity - 8) })} />
+            <Chip label="+" onPress={() => updateSettings({ districtOpacity: Math.min(80, settings.districtOpacity + 8) })} />
+          </View>
+        ) : null}
+        <ToggleRow icon="git-network-outline" label={t('layers.roads')} hint={t('layers.roadsHint')} value={settings.roads} onChange={v => updateSettings({ roads: v })} />
+        <ToggleRow icon="business-outline" label={t('layers.buildings')} hint={t('layers.buildingsHint')} value={settings.buildings} onChange={v => updateSettings({ buildings: v })} />
+        <ToggleRow icon="storefront-outline" label={t('layers.places')} hint={t('layers.placesHint')} value={settings.places} onChange={v => updateSettings({ places: v })} />
+        <ToggleRow icon="people-outline" label={t('layers.community')} hint={t('layers.communityHint')} value={settings.community} onChange={v => updateSettings({ community: v })} />
+        <ToggleRow icon="bus-outline" label={t('layers.transport')} hint={t('layers.transportHint')} value={settings.transport} onChange={v => updateSettings({ transport: v })} />
+        <ToggleRow icon="flag-outline" label={t('layers.reports')} hint={t('layers.reportsHint')} value={settings.reports} onChange={v => updateSettings({ reports: v })} />
+      </ScrollView>
     </Sheet>
   );
 }

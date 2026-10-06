@@ -144,7 +144,7 @@ Magaalo · Made for getting around	Magaalo · Loo sameeyay socodka magaalada	phr
 Clear saved history	Tirtir taariikhda la keydiyay	phrase	settings	ui:settings.clearHistory
 Saved history cleared.	Taariikhda la keydiyay waa la tirtiray.	sentence	settings	ui:settings.cleared
 Your location is used on this device to show where you are and to guide you. It is only sent when you choose to send a report, and then only the reported spot is stored. Reviews and reports are linked to your account so the community model can learn whose reports are reliable; other people only see combined alerts, never your name.	Goobtaada waxaa lagu isticmaalaa qalabkan si loo muujiyo halka aad joogto loona hago. Waxaa la diraa oo keliya marka aad doorato inaad warbixin dirto, markaas waxaa la keydiyaa oo keliya meesha la soo sheegay. Faallooyinka iyo warbixinnada waxay ku xiran yihiin akoonkaaga si nidaamka bulshadu u barto warbixinnada la isku hallayn karo; dadka kale waxay arkaan oo keliya digniinaha la isku daray, marna magacaaga.	sentence	privacy	ui:privacy.body
-Roads and buildings come from OpenStreetMap contributors (ODbL). Places also come from Overture Maps. District boundaries come from OCHA / HDX. Satellite imagery is Esri World Imagery. The street base map is Esri Light Gray Canvas. Routes are calculated by Valhalla and OSRM using OpenStreetMap data. Community alerts come from Magaalo users. Map data can be incomplete or out of date.	Waddooyinka iyo dhismayaasha waxay ka yimaadeen ka qaybgalayaasha OpenStreetMap (ODbL). Meelaha qaarkood waxay ka yimaadeen Overture Maps. Xuduudaha degmooyinka waxay ka yimaadeen OCHA / HDX. Sawirrada dayax-gacmeedka waa Esri World Imagery. Khariidadda salka ah waa Esri Light Gray Canvas. Jidadka waxaa xisaabiya Valhalla iyo OSRM iyagoo adeegsanaya xogta OpenStreetMap. Digniinaha bulshada waxay ka yimaadeen isticmaalayaasha Magaalo. Xogta khariidaddu waxay noqon kartaa mid aan dhammaystirnayn ama duugowday.	sentence	help	ui:help.body
+Roads and buildings come from OpenStreetMap contributors (ODbL). Places also come from Overture Maps. District boundaries come from OCHA / HDX. Satellite imagery is Esri World Imagery; the street map is OpenStreetMap. Routes are planned by OSRM through the Magaalo website, using OpenStreetMap roads. Community alerts and reviewed details come from Magaalo users. Map data can be incomplete or out of date.	Waddooyinka iyo dhismayaasha waxay ka yimaadeen ka qaybgalayaasha OpenStreetMap (ODbL). Meelaha qaarkood waxay ka yimaadeen Overture Maps. Xuduudaha degmooyinka waxay ka yimaadeen OCHA / HDX. Sawirrada dayax-gacmeedka waa Esri World Imagery; khariidadda waddooyinka waa OpenStreetMap. Jidadka waxaa qorsheeya OSRM oo maraya bogga Magaalo, iyagoo adeegsanaya waddooyinka OpenStreetMap. Digniinaha bulshada iyo faahfaahinta la hubiyay waxay ka yimaadeen isticmaalayaasha Magaalo. Xogta khariidaddu waxay noqon kartaa mid aan dhammaystirnayn ama duugowday.	sentence	help	ui:help.body
 Selected	La doortay	word	language	ui:language.selected
 You can change this any time.	Waad beddeli kartaa mar kasta.	sentence	language	ui:language.hint
 If your phone has no Somali voice, spoken directions use English.	Haddii taleefankaagu aanu lahayn cod Soomaali ah, tilmaamaha codka waxay noqonayaan Ingiriis.	sentence	language	ui:language.voiceNote
@@ -232,6 +232,88 @@ just now	hadda	phrase	time	ui:time.justNow
 {n} min ago	{n} daqiiqo kahor	phrase	time	ui:time.minAgo
 {n} h ago	{n} saacadood kahor	phrase	time	ui:time.hAgo
 {n} days ago	{n} maalmood kahor	phrase	time	ui:time.dAgo
+Around the city	Magaalada hareeraheeda	phrase	discover	ui:discover.title
+Liido Beach	Xeebta Liido	phrase	discover	ui:discover.liido
+Along the Indian Ocean	Badweynta Hindiya agteeda	phrase	discover	ui:discover.liidoHint
+Bakaaraha Market	Suuqa Bakaaraha	phrase	discover	ui:discover.bakaaraha
+The heart of the city's trade	Wadnaha ganacsiga magaalada	phrase	discover	ui:discover.bakaarahaHint
+Aden Adde Airport	Garoonka Aadan Cadde	phrase	discover	ui:discover.airport
+Mogadishu's international gateway	Albaabka caalamiga ah ee Muqdisho	phrase	discover	ui:discover.airportHint
+Improve your city map	Hagaaji khariidadda magaaladaada	phrase	improve	ui:improve.title
+Share names you know or outline what is missing	La wadaag magacyada aad taqaanid ama calaamadee waxa maqan	phrase	improve	ui:improve.hint
+Suggestions are reviewed before they appear on the public map.	Soo jeedinnada waa la hubiyaa ka hor inta aysan ka muuqan khariidadda guud.	sentence	improve	ui:improve.reviewed
+Suggest a street name	Soo jeedi magac waddo	phrase	improve	ui:improve.street
+Draw along the street	Ku sawir waddada dhinaceeda	phrase	improve	ui:improve.streetHint
+Outline a missing building	Calaamadee dhismo maqan	phrase	improve	ui:improve.building
+Tap the corners of the building	Taabo geesaha dhismaha	phrase	improve	ui:improve.buildingHint
+Add a business or place	Ku dar ganacsi ama meel	phrase	improve	ui:improve.business
+Drop a point where it is	Dhig calaamad halka uu ku yaal	phrase	improve	ui:improve.businessHint
+Suggest a bus stop or taxi stand	Soo jeedi boosteejo bas ama meel tagsi	phrase	improve	ui:improve.stop
+Drop a point at the stop	Dhig calaamad boosteejada	phrase	improve	ui:improve.stopHint
+Report a road problem or missing connection	Soo sheeg dhibaato waddo ama isku xir maqan	phrase	improve	ui:improve.roadIssue
+Draw where the road should connect or is wrong	Sawir halka waddadu ay ku xirmi lahayd ama ay khaldan tahay	phrase	improve	ui:improve.roadIssueHint
+My suggestions	Soo jeedinnadayda	phrase	improve	ui:improve.mine
+Tap the map to place the point	Taabo khariidadda si aad u dhigto calaamadda	phrase	draw	ui:draw.point
+Tap the map to draw the line	Taabo khariidadda si aad u sawirto xariiqda	phrase	draw	ui:draw.line
+Tap each corner of the outline	Taabo gees kasta oo ka mid ah xuduudda	phrase	draw	ui:draw.polygon
+{n} points added	{n} calaamadood ayaa lagu daray	phrase	draw	ui:draw.points
+Undo	Dib u celi	word	draw	ui:draw.undo
+Finish	Dhammee	word	draw	ui:draw.finish
+Name	Magac	word	suggestion	ui:suggestion.name
+Notes for reviewers (optional)	Qoraal loogu talagalay dib-u-eegayaasha (ikhtiyaari)	phrase	suggestion	ui:suggestion.notes
+Submit for review	U dir dib-u-eegis	phrase	suggestion	ui:suggestion.submit
+Suggestion submitted for review	Soo jeedinta waxaa loo diray dib-u-eegis	phrase	suggestion	ui:suggestion.sent
+Thank you for adding local knowledge.	Mahadsanid inaad ku dartay aqoonta deegaanka.	sentence	suggestion	ui:suggestion.sentHint
+Outline the missing building on the map first.	Marka hore khariidadda ku calaamadee dhismaha maqan.	sentence	suggestion	ui:suggestion.needsOutline
+You have not submitted any suggestions yet.	Weli wax soo jeedin ah ma aadan dirin.	sentence	suggestion	ui:suggestion.none
+Suggest a road correction	Soo jeedi sixitaan waddo	phrase	suggest	ui:suggest.roadCorrection
+Street name	Magac waddo	phrase	kind	ui:kind.street_name
+Missing building	Dhismo maqan	phrase	kind	ui:kind.missing_building
+Business or place	Ganacsi ama meel	phrase	kind	ui:kind.business
+Bus stop or taxi stand	Boosteejo bas ama tagsi	phrase	kind	ui:kind.transport_stop
+Road problem	Dhibaato waddo	phrase	kind	ui:kind.road_issue
+Pending	Sugaya	word	status	ui:status.pending
+Approved	La aqbalay	word	status	ui:status.approved
+Rejected	La diiday	word	status	ui:status.rejected
+Reviewed community contribution	Ku darsasho bulsho oo la hubiyay	phrase	community	ui:community.reviewed
+Mapped building	Dhismo khariidadda ku jira	phrase	place	ui:place.building
+Unnamed road	Waddo aan magac lahayn	phrase	place	ui:place.road
+Finding the nearest road…	Waddada ugu dhow ayaa la raadinayaa…	phrase	place	ui:place.accessFinding
+On {street}	Waxay ku taal {street}	phrase	place	ui:place.onStreet
+On an unnamed road	Waxay ku taal waddo aan magac lahayn	phrase	place	ui:place.unnamedRoad
+No mapped road nearby	Waddo khariidadda ku jirta oo u dhow ma jirto	phrase	place	ui:place.noAccess
+Routes end at the road, {m} m from here	Jidku wuxuu ku dhammaanayaa waddada, {m} m halkan ka fog	phrase	place	ui:place.accessHint
+Road network	Shabakadda waddooyinka	phrase	layers	ui:layers.roads
+Streets, lanes, and connections	Waddooyin, luuqyo iyo isku xirro	phrase	layers	ui:layers.roadsHint
+Zoom in to see mapped buildings	Soo dhawee si aad u aragto dhismayaasha	phrase	layers	ui:layers.buildingsHint
+Businesses & places	Ganacsiyada & meelaha	phrase	layers	ui:layers.places
+Names from OSM and local contributors	Magacyo ka yimid OSM iyo dadka deegaanka	phrase	layers	ui:layers.placesHint
+Community details	Faahfaahinta bulshada	phrase	layers	ui:layers.community
+Reviewed names and missing features	Magacyo la hubiyay iyo waxyaabo maqnaa	phrase	layers	ui:layers.communityHint
+Routes, stops, and fresh vehicle positions	Jidad, boosteejooyin iyo goobaha gaadiidka	phrase	layers	ui:layers.transportHint
+A color for every neighborhood	Midab xaafad kasta	phrase	layers	ui:layers.districtsHint
+Closures and changes confirmed by people nearby	Xirnaanshaha iyo isbeddellada ay xaqiijiyeen dadka agagaarka	phrase	layers	ui:layers.reportsHint
+District color intensity {p}%	Xoogga midabka degmada {p}%	phrase	layers	ui:layers.intensity
+Show all Mogadishu	Muuji Muqdisho oo dhan	phrase	map	ui:map.showAll
+My location	Goobtayda	phrase	map	ui:map.myLocation
+Satellite imagery could not load. Try the Street view.	Sawirrada dayax-gacmeedka lama soo gelin karo. Isku day muuqaalka waddada.	sentence	map	ui:map.satelliteFailed
+Sources & coverage	Ilaha & baaxadda	phrase	sources	ui:sources.title
+Satellite imagery	Sawirrada dayax-gacmeedka	phrase	sources	ui:sources.imagery
+Esri World Imagery. A mosaic with different capture dates; 'current' does not mean newly captured.	Esri World Imagery. Isku-dar sawirro taariikho kala duwan leh; "hadda" macnaheedu maaha in hadda la qaaday.	sentence	sources	ui:sources.imageryHint
+District boundaries	Xuduudaha degmooyinka	phrase	sources	ui:sources.districts
+OCHA Somalia boundaries from HDX, filtered to Banaadir. Newer districts have no boundary yet.	Xuduudaha OCHA Soomaaliya ee HDX, Banaadir oo keliya. Degmooyinka cusub weli xuduud ma laha.	sentence	sources	ui:sources.districtsHint
+Roads, buildings & places	Waddooyin, dhismayaal & meelo	phrase	sources	ui:sources.roads
+OpenStreetMap roads and footprints; Overture Maps places; reviewed community contributions.	Waddooyinka iyo dhismayaasha OpenStreetMap; meelaha Overture Maps; ku darsasho bulsho oo la hubiyay.	sentence	sources	ui:sources.roadsHint
+OSM extract {date}: {roads} road segments, {buildings} footprints, {places} places.	Xogta OSM {date}: {roads} qaybood waddo, {buildings} dhismayaal, {places} meelood.	sentence	sources	ui:sources.roadsCounts
+Route planning	Qorsheynta jidka	phrase	sources	ui:sources.routing
+OSRM through the Magaalo website for driving, walking and cycling. Closures confirmed by the community are avoided.	OSRM oo maraya bogga Magaalo ee baabuurta, lugta iyo baaskiilka. Waddooyinka ay bulshadu xaqiijisay inay xiran yihiin waa laga leexdaa.	sentence	sources	ui:sources.routingHint
+Road network analysis	Falanqaynta shabakadda waddooyinka	phrase	network	ui:network.title
+{p}% of roads are connected	{p}% waddooyinka way isku xiran yihiin	phrase	network	ui:network.connected
+{junctions} junctions · {km} km · {fragments} separate fragments	{junctions} isgoysyo · {km} km · {fragments} qaybood oo go'an	phrase	network	ui:network.graph
+{n} likely missing connections found	{n} isku xir oo u badan inay maqan yihiin ayaa la helay	phrase	network	ui:network.gaps
+Machine-learning model, {recall}% recall on held-out junctions; {joins} would reconnect fragments. Sent to reviewers, not used for routing until approved.	Nidaam barasho mashiin, {recall}% saxnaan isgoysyada la tijaabiyay; {joins} waxay dib u xiri lahaayeen qaybaha go'an. Waxaa loo diray dib-u-eegayaasha, jidadka looma isticmaalo ilaa la aqbalo.	sentence	network	ui:network.gapsHint
+{linked} of {total} buildings linked to a road	{linked} ka mid ah {total} dhismayaal ayaa waddo ku xiran	phrase	network	ui:network.linked
+Median {m} m to the road; {named} on a named street; {places} places linked.	Celcelis ahaan {m} m ilaa waddada; {named} waxay ku yaalliin waddo magac leh; {places} meelood ayaa ku xiran.	sentence	network	ui:network.linkedHint
 road	waddo	word	navigation	vocabulary
 street	jid	word	navigation	vocabulary
 main road	waddada weyn	phrase	navigation	vocabulary

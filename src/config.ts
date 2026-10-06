@@ -3,12 +3,19 @@ export const SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_URL ?? 'https://rfa
 export const SUPABASE_PUBLISHABLE_KEY =
   process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? 'sb_publishable_-GioI9OImUtfLzU5QTJ7wg_nZ3ety1J';
 
-// Same public bucket the Magaalo Atlas website uses for tiles, districts and the search index.
+// The Magaalo Atlas website is the app's data and routing service: /data (map, places, districts,
+// road network), /api/route (OSRM), /api/suggestions (moderated contributions), /api/alerts, /api/transport.
+export const ATLAS_WEBSITE = process.env.EXPO_PUBLIC_ATLAS_URL ?? 'https://magaalo-mogadishu-atlas.amiinrealz.chatgpt.site';
+// Same public bucket the website reads tiles from (the website falls back to its own /data copy).
 export const MAP_STORAGE = `${SUPABASE_URL}/storage/v1/object/public/mogadishu-map`;
-export const ATLAS_WEBSITE = 'https://magaalo-mogadishu-atlas.amiinrealz.chatgpt.site';
 
+// Used only if the website cannot be reached — the same servers the website itself calls.
+export const OSRM_SERVERS = {
+  driving: ['https://router.project-osrm.org/route/v1/driving', 'https://routing.openstreetmap.de/routed-car/route/v1/driving'],
+  walking: ['https://routing.openstreetmap.de/routed-foot/route/v1/driving'],
+  cycling: ['https://routing.openstreetmap.de/routed-bike/route/v1/driving'],
+};
 export const VALHALLA_URL = 'https://valhalla1.openstreetmap.de/route';
-export const OSRM_URL = 'https://router.project-osrm.org/route/v1';
 
 export const BOUNDS = { south: 1.93, west: 45.12, north: 2.23, east: 45.49 };
 export const CITY_CENTER = { lat: 2.046, lng: 45.318 };

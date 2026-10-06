@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { MAP_STORAGE } from '../config';
+import { ATLAS_WEBSITE, MAP_STORAGE } from '../config';
 import { inside } from './geo';
 
 export type Place = {
@@ -11,6 +11,16 @@ export type Place = {
   lat: number;
   lng: number;
   street?: boolean;
+  /** What was tapped: a named place, a building footprint, a road, or a dropped pin. */
+  kind?: 'place' | 'building' | 'road' | 'pin';
+  /** OSM/Overture id, used for the network access point and for suggestions. */
+  featureId?: string;
+  phone?: string;
+  website?: string;
+  openingHours?: string;
+  source?: string;
+  /** Geometry in lng/lat for roads and buildings (sent with suggestions). */
+  geometry?: { type: string; coordinates: unknown };
 };
 
 const CACHE_KEY = 'magaalo.searchIndex.v1';
@@ -35,7 +45,8 @@ function compact(raw: RawPlace[]): Place[] {
     const lat = Number(p.lat), lng = Number(p.lon);
     if (!inside(lng, lat)) return [];
     return [{
-      id: String(p.id ?? i), name: displayName(p), nameSo: p['name:so'] ? String(p['name:so']) : undefined,
+      id: String(p.id ?? i), featureId: p.id ? String(p.id) : undefined, kind: p.highway ? 'road' : 'place',
+      name: displayName(p), nameSo: p['name:so'] ? String(p['name:so']) : undefined,
       category: categoryOf(p), address: p.address ? String(p.address) : p['addr:street'] ? String(p['addr:street']) : undefined,
       lat, lng, street: Boolean(p.highway),
     }];
@@ -46,7 +57,9 @@ function compact(raw: RawPlace[]): Place[] {
 export function loadIndex(): Promise<Place[]> {
   indexPromise ||= (async () => {
     try {
-      const response = await fetch(`${MAP_STORAGE}/search-index.json`);
+      // The website's own index (same file the website searches), Supabase storage as a backup.
+      let response = await fetch(`${ATLAS_WEBSITE}/data/search-index.json`).catch(() => null);
+      if (!response?.ok) response = await fetch(`${MAP_STORAGE}/search-index.json`);
       if (!response.ok) throw new Error(String(response.status));
       const places = compact(await response.json());
       AsyncStorage.setItem(CACHE_KEY, JSON.stringify(places)).catch(() => {});
@@ -97,6 +110,7 @@ export async function searchPlaces(text: string, near?: { lat: number; lng: numb
     if (near) score += Math.min(20, Math.hypot(place.lat - near.lat, place.lng - near.lng) * 200);
     ranked.push({ place, score });
   }
+  if (!ranked.length) return nominatim(text);
   const seen = new Set<string>();
   return ranked.sort((a, b) => a.score - b.score).flatMap(({ place }) => {
     const key = `${normalizeText(place.name)}:${place.lat.toFixed(4)}:${place.lng.toFixed(4)}`;
@@ -104,4 +118,35 @@ export async function searchPlaces(text: string, near?: { lat: number; lng: numb
     seen.add(key);
     return [place];
   }).slice(0, limit);
+}
+
+/** The website's /api/search (OpenStreetMap Nominatim, bounded to Mogadishu) when the local index has no match. */
+async function nominatim(text: string): Promise<Place[]> {
+  const params = new URLSearchParams({ q: `${text}, Mogadishu, Somalia` });
+  try {
+    const response = await fetch(`${ATLAS_WEBSITE}/api/search?${params}`);
+    if (!response.ok) return [];
+    const rows = (await response.json()) as { place_id: number; lat: string; lon: string; name?: string; display_name: string; type?: string; osm_type?: string; osm_id?: number }[];
+    return rows.flatMap(r => {
+      const lat = Number(r.lat), lng = Number(r.lon);
+      if (!inside(lng, lat)) return [];
+      const name = r.name || r.display_name.split(',')[0];
+      return [{ id: `nominatim:${r.place_id}`, featureId: r.osm_type && r.osm_id ? `${r.osm_type}/${r.osm_id}` : undefined, kind: 'place' as const,
+        name, category: (r.type || 'place').replace(/_/g, ' '), address: r.display_name.split(',').slice(1, 3).join(',').trim(), lat, lng }];
+    });
+  } catch {
+    return [];
+  }
+}
+
+/** Converts a place record from the website's atlas.json (place_features) into a Place. */
+export function placeFromFeature(feature: { id: string; geometry: { coordinates: unknown }; properties: Record<string, unknown> }): Place {
+  const p = feature.properties, [lng, lat] = feature.geometry.coordinates as [number, number];
+  return {
+    id: feature.id, featureId: feature.id, kind: 'place', name: displayName(p as RawPlace) || 'Unnamed place', nameSo: p['name:so'] ? String(p['name:so']) : undefined,
+    category: categoryOf(p as RawPlace), address: p.address ? String(p.address) : p['addr:street'] ? String(p['addr:street']) : undefined, lat, lng,
+    phone: p.phone ? String(p.phone) : undefined, website: p.website ? String(p.website) : undefined,
+    openingHours: p.opening_hours ? String(p.opening_hours) : undefined,
+    source: p.source === 'Overture Maps' ? `Overture Maps · ${feature.id.replace('overture/', '')}` : `OpenStreetMap · ${feature.id}`,
+  };
 }
