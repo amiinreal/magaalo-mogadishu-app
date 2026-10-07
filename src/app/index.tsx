@@ -1,6 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useKeepAwake } from 'expo-keep-awake';
 import * as Haptics from 'expo-haptics';
 import { router, useFocusEffect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -62,8 +61,6 @@ function anchor(geometry: Geometry, fallback: Point): Point {
   const p = flat(geometry.coordinates);
   return p ? { lng: p[0], lat: p[1] } : fallback;
 }
-
-function KeepAwake() { useKeepAwake(); return null; }
 
 export default function MapScreen() {
   const { t, lang } = useI18n();
@@ -432,7 +429,6 @@ export default function MapScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: '#F0F1EB' }}>
       <StatusBar style={navigating || settings.basemap === 'satellite' ? 'light' : 'dark'} />
-      {navigating ? <KeepAwake /> : null}
       <MapView
         ref={map}
         config={{
