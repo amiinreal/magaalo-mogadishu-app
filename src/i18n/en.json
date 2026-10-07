@@ -328,5 +328,9 @@
   "network.gaps": "{n} likely missing connections found",
   "network.gapsHint": "Machine-learning model, {recall}% recall on held-out junctions; {joins} would reconnect fragments. Sent to reviewers, not used for routing until approved.",
   "network.linked": "{linked} of {total} buildings linked to a road",
-  "network.linkedHint": "Median {m} m to the road; {named} on a named street; {places} places linked."
+  "network.linkedHint": "Median {m} m to the road; {named} on a named street; {places} places linked.",
+  "explore.expand": "Show more places and suggestions",
+  "explore.collapse": "Show less",
+  "place.moreDetails": "Details & suggestions",
+  "place.lessDetails": "Hide details"
 }

@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "dependencies": {
+    "@expo-google-fonts/dm-sans": "^0.4.2",
+    "@expo/metro-runtime": "~57.0.16",
     "@expo/vector-icons": "^15.0.2",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-native-community/netinfo": "12.0.1",
@@ -18,16 +20,20 @@
     "expo-speech": "~57.0.3",
     "expo-status-bar": "~57.0.1",
     "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-native": "0.86.3",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.0",
     "react-native-url-polyfill": "^3.0.0",
+    "react-native-web": "^0.21.2",
     "react-native-webview": "13.16.1"
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
+    "eslint": "^9.0.0",
     "leaflet": "^1.9.4",
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "eslint-config-expo": "~57.0.2"
   },
   "scripts": {
     "start": "expo start",
@@ -37,7 +43,8 @@
     "lint": "expo lint",
     "vendor:leaflet": "node scripts/vendor-leaflet.mjs",
     "corpus": "node scripts/build-corpus.mjs",
-    "check": "npm run typecheck && node scripts/check-i18n.mjs"
+    "check": "npm run typecheck && node scripts/check-i18n.mjs",
+    "web": "expo start --web"
   },
   "private": true
 }

@@ -1,5 +1,6 @@
 import { router } from 'expo-router';
-import { Text } from 'react-native';
+import { } from 'react-native';
+import { Text } from '../components/Typography';
 import { Page } from '../components/Page';
 import { Row, styles, ToggleRow } from '../components/ui';
 import { useI18n } from '../i18n';

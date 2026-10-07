@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
+import { Text } from '../components/Typography';
 import { Page } from '../components/Page';
 import { Button, LinkButton, Row, styles } from '../components/ui';
 import { colors } from '../config';
@@ -63,10 +64,10 @@ export default function AccountScreen() {
     <Page title={mode === 'signIn' ? t('account.signIn') : t('account.signUp')}>
       <Text style={[styles.sub, { marginBottom: 16 }]}>{t('account.why')}</Text>
       <TextInput value={email} onChangeText={setEmail} placeholder={t('account.email')} placeholderTextColor={colors.muted}
-        autoCapitalize="none" autoComplete="email" keyboardType="email-address" textContentType="emailAddress" style={[styles.input, { marginBottom: 10 }]} />
+        autoCapitalize="none" autoComplete="email" keyboardType="email-address" textContentType="emailAddress" style={[styles.TextInput, { marginBottom: 10 }]} />
       <TextInput value={password} onChangeText={setPassword} placeholder={t('account.password')} placeholderTextColor={colors.muted}
         secureTextEntry autoComplete={mode === 'signIn' ? 'current-password' : 'new-password'} textContentType={mode === 'signIn' ? 'password' : 'newPassword'}
-        style={[styles.input, { marginBottom: 14 }]} onSubmitEditing={submit} />
+        style={[styles.TextInput, { marginBottom: 14 }]} onSubmitEditing={submit} />
       {message ? <Text style={[styles.sub, { color: colors.green, marginBottom: 12 }]}>{message}</Text> : null}
       <Button label={mode === 'signIn' ? t('account.signIn') : t('account.signUp')} busy={busy}
         disabled={!email.includes('@') || password.length < 6} onPress={submit} />

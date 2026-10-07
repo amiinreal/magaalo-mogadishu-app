@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Text } from 'react-native';
+import { ActivityIndicator, } from 'react-native';
+import { Text } from '../components/Typography';
 import { Page } from '../components/Page';
 import { Row, styles, ToggleRow } from '../components/ui';
 import { colors } from '../config';

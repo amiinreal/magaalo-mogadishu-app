@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
-import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Pressable, TextInput, View } from 'react-native';
+import { Text } from '../Typography';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../../config';
 import { formatAgo, formatClock, formatDistance, useI18n } from '../../i18n';
@@ -20,7 +21,7 @@ export function RouteHeader({ fromLabel, toLabel, mode, onMode, onBack, onPickFr
   const insets = useSafeAreaInsets();
   const modes: [Mode, string, IconName][] = [['driving', t('route.drive'), 'car-outline'], ['walking', t('route.walk'), 'walk-outline'], ['cycling', t('route.cycle'), 'bicycle-outline']];
   return (
-    <View style={{ position: 'absolute', top: insets.top + 8, left: 12, right: 12 }}>
+    <View style={{ position: 'absolute', top: insets.top + 12, left: 16, right: 16 }}>
       <View style={[styles.banner, { backgroundColor: '#fff', alignItems: 'center' }]}>
         <Pressable accessibilityRole="button" accessibilityLabel={t('common.back')} onPress={onBack} hitSlop={10} style={{ marginRight: 10 }}>
           <Ionicons name="chevron-back" size={24} color={colors.ink} />
@@ -71,7 +72,7 @@ export function RouteSheet({ onLayout, routes, selected, loading, error, onSelec
       <Text style={[styles.sub, { color: route.avoided ? colors.green : colors.muted, fontWeight: '600', marginBottom: 12 }]}>{note}</Text>
       <Button label={t('route.start')} icon="navigate" onPress={onStart} />
       {routes.map((r, i) => i === selected ? null : (
-        <Pressable key={i} onPress={() => onSelect(i)} style={{ paddingTop: 10 }} accessibilityRole="button">
+        <Pressable key={i} onPress={() => onSelect(i)} style={{ padding: 14, marginTop: 10, borderRadius: 14, backgroundColor: colors.soft }} accessibilityRole="button">
           <Text style={styles.rowHint}>{t('route.alternative', { min: minutes(r.duration), distance: formatDistance(lang, r.distance) })}</Text>
         </Pressable>
       ))}
@@ -90,12 +91,12 @@ export function NavigationBanner({ guidance, simulate, voice, onVoice, onRecente
     : status === 'weak' ? t('nav.gpsWeak', { m: Math.round(guidance.position?.accuracy ?? 0) }) : t('nav.waitingGps');
   return (
     <>
-      <View style={{ position: 'absolute', top: insets.top + 8, left: 12, right: 12, backgroundColor: colors.green, borderRadius: 16, padding: 16, elevation: 8 }}
+      <View style={{ position: 'absolute', top: insets.top + 12, left: 16, right: 16, backgroundColor: colors.green, borderRadius: 20, padding: 20, elevation: 8 }}
         accessibilityLiveRegion="polite">
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Ionicons name={(status === 'ok' ? maneuverIcon(guidance.nextStep) : 'navigate') as IconName} size={34} color="#fff" style={{ marginRight: 14 }} />
+          <Ionicons name={(status === 'ok' ? maneuverIcon(guidance.nextStep) : 'navigate') as IconName} size={42} color="#fff" style={{ marginRight: 14 }} />
           <View style={{ flex: 1 }}>
-            <Text style={{ color: '#fff', fontSize: 26, fontWeight: '800' }}>{title}</Text>
+            <Text style={{ color: '#fff', fontSize: 32, fontWeight: '800' }}>{title}</Text>
             <Text style={{ color: 'rgba(255,255,255,.85)', fontSize: 15, marginTop: 2 }} numberOfLines={2}>
               {status === 'offroute' ? t('nav.offRoute') : guidance.instruction || t('instr.follow')}
             </Text>
@@ -105,7 +106,7 @@ export function NavigationBanner({ guidance, simulate, voice, onVoice, onRecente
       </View>
       <View style={{ position: 'absolute', right: 14, top: insets.top + 150, gap: 12 }}>
         <RoundButton icon={voice ? 'volume-high' : 'volume-mute'} label={t('settings.voice')} onPress={onVoice} />
-        {!following ? <RoundButton icon="locate" label="Recenter" onPress={onRecenter} tint={colors.blue} /> : null}
+        {!following ? <RoundButton icon="locate" label={t('map.myLocation')} onPress={onRecenter} tint={colors.blue} /> : null}
       </View>
     </>
   );
@@ -178,7 +179,7 @@ export function ArrivedSheet({ onLayout, destination, signedIn, simulated, onSub
       ) : null}
       {showComment ? (
         <TextInput value={comment} onChangeText={setComment} placeholder={t('arrive.comment')} placeholderTextColor={colors.muted}
-          multiline maxLength={1000} style={[styles.input, { height: 70, marginTop: 12, paddingTop: 10, textAlignVertical: 'top' }]} />
+          multiline maxLength={1000} style={[styles.TextInput, { height: 70, marginTop: 12, paddingTop: 10, textAlignVertical: 'top' }]} />
       ) : <LinkButton label={t('arrive.comment')} onPress={() => setShowComment(true)} />}
       {!signedIn ? <Text style={[styles.rowHint, { marginVertical: 6 }]}>{t('arrive.signIn')}</Text> : null}
       <Button

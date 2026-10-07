@@ -314,6 +314,10 @@ Road network analysis	Falanqaynta shabakadda waddooyinka	phrase	network	ui:netwo
 Machine-learning model, {recall}% recall on held-out junctions; {joins} would reconnect fragments. Sent to reviewers, not used for routing until approved.	Nidaam barasho mashiin, {recall}% saxnaan isgoysyada la tijaabiyay; {joins} waxay dib u xiri lahaayeen qaybaha go'an. Waxaa loo diray dib-u-eegayaasha, jidadka looma isticmaalo ilaa la aqbalo.	sentence	network	ui:network.gapsHint
 {linked} of {total} buildings linked to a road	{linked} ka mid ah {total} dhismayaal ayaa waddo ku xiran	phrase	network	ui:network.linked
 Median {m} m to the road; {named} on a named street; {places} places linked.	Celcelis ahaan {m} m ilaa waddada; {named} waxay ku yaalliin waddo magac leh; {places} meelood ayaa ku xiran.	sentence	network	ui:network.linkedHint
+Show more places and suggestions	Muuji goobo iyo talooyin dheeraad ah	phrase	explore	ui:explore.expand
+Show less	Muuji wax yar	phrase	explore	ui:explore.collapse
+Details & suggestions	Faahfaahin iyo talooyin	phrase	place	ui:place.moreDetails
+Hide details	Qari faahfaahinta	phrase	place	ui:place.lessDetails
 road	waddo	word	navigation	vocabulary
 street	jid	word	navigation	vocabulary
 main road	waddada weyn	phrase	navigation	vocabulary

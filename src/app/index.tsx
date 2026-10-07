@@ -5,7 +5,8 @@ import * as Haptics from 'expo-haptics';
 import { router, useFocusEffect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Text } from '../components/Typography';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MapView, type CommunitySuggestion, type Geometry, type MapEvent, type MapFeature, type MapHandle, type MapMarker } from '../components/MapView';
 import { AlertSheet, ExploreSheet, LayersSheet, PickSheet, PlaceSheet, SearchSheet, type AccessInfo } from '../components/sheets/ExploreSheets';
@@ -349,7 +350,7 @@ export default function MapScreen() {
       }} />;
   } else if (screen.kind === 'place') {
     const place = screen.place;
-    sheet = <PlaceSheet onLayout={onLayout} place={place} access={access[accessKey(place)]} onDirections={() => openDirections(place)}
+    sheet = <PlaceSheet key={place.id} onLayout={onLayout} place={place} access={access[accessKey(place)]} onDirections={() => openDirections(place)}
       onSuggest={() => { if (requireSignIn()) setScreen(suggestFor(place)); }}
       onReportBuilding={async exists => { if (await submitReport('building', exists, place, place.name)) setScreen({ kind: 'reportSent' }); }} />;
   } else if (screen.kind === 'pick') {
@@ -419,7 +420,7 @@ export default function MapScreen() {
     sheet = <CommunitySheet onLayout={onLayout} suggestion={s} onClose={() => setScreen({ kind: 'explore' })}
       onDirections={() => openDirections({ id: s.id, kind: 'place', name: s.name, category: t(`kind.${s.kind}` as StringKey), ...at })} />;
   } else if (screen.kind === 'layers') {
-    sheet = <LayersSheet onLayout={onLayout} onClose={() => setScreen({ kind: 'explore' })} />;
+    sheet = <LayersSheet onLayout={onLayout} onShowAll={() => { setScreen({ kind: 'explore' }); map.current?.fitCity(); }} onClose={() => setScreen({ kind: 'explore' })} />;
   } else if (screen.kind === 'alert') {
     const alert = screen.alert;
     sheet = <AlertSheet onLayout={onLayout} alert={alert} busy={busy} onClose={() => setScreen({ kind: 'explore' })}
@@ -429,7 +430,7 @@ export default function MapScreen() {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#1d2a26' }}>
+    <View style={{ flex: 1, backgroundColor: '#F0F1EB' }}>
       <StatusBar style={navigating || settings.basemap === 'satellite' ? 'light' : 'dark'} />
       {navigating ? <KeepAwake /> : null}
       <MapView
@@ -460,7 +461,7 @@ export default function MapScreen() {
       ) : null}
 
       {showTopSearch ? (
-        <View style={{ position: 'absolute', top: insets.top + 8, left: 12, right: 12 }}>
+        <View style={{ position: 'absolute', top: insets.top + 12, left: 16, right: 16 }}>
           <View style={top.searchBar}>
             <Pressable style={{ flex: 1, flexDirection: 'row', alignItems: 'center', height: '100%' }} accessibilityRole="search"
               onPress={() => setScreen({ kind: 'search', query: '', purpose: 'go' })}>
@@ -494,11 +495,8 @@ export default function MapScreen() {
       ) : null}
 
       {showTopSearch && screen.kind !== 'report' ? (
-        <View style={{ position: 'absolute', right: 14, top: insets.top + 120 + (online ? 0 : 64), gap: 12 }}>
-          <RoundButton icon={settings.basemap === 'satellite' ? 'map-outline' : 'earth-outline'} label={settings.basemap === 'satellite' ? t('layers.street') : t('layers.satellite')}
-            onPress={() => updateSettings({ basemap: settings.basemap === 'satellite' ? 'street' : 'satellite' })} />
+        <View style={{ position: 'absolute', right: 16, top: insets.top + 126 + (online ? 0 : 64), gap: 12 }}>
           <RoundButton icon="layers-outline" label={t('layers.title')} onPress={() => setScreen({ kind: 'layers' })} />
-          <RoundButton icon="expand-outline" label={t('map.showAll')} onPress={() => map.current?.fitCity()} />
           <RoundButton icon="locate" label={t('map.myLocation')} tint={colors.blue} onPress={locate} />
         </View>
       ) : null}
@@ -506,7 +504,7 @@ export default function MapScreen() {
       {(showTopSearch || (navigating && screen.kind === 'route' && !closure)) && !['report', 'reportSent', 'improve'].includes(screen.kind) ? (
         <View style={{ position: 'absolute', right: 14, bottom: sheetHeight + 14 }}>
           <RoundButton icon="flag" label={t('report.title')} background={colors.amber} tint={colors.ink} size={52}
-            onPress={() => { if (requireSignIn()) setScreen({ kind: 'report' }); }} />
+            onPress={() => setScreen({ kind: 'report' })} />
         </View>
       ) : null}
 
@@ -541,7 +539,7 @@ async function submitTripReview(trip: Trip, route: Route | null, startedAt: numb
 
 const top = StyleSheet.create({
   searchBar: {
-    height: 56, borderRadius: 28, backgroundColor: '#fff', flexDirection: 'row', alignItems: 'center',
+    height: 56, borderRadius: 20, backgroundColor: '#fff', flexDirection: 'row', alignItems: 'center',
     shadowColor: '#000', shadowOpacity: 0.12, shadowRadius: 10, shadowOffset: { width: 0, height: 3 }, elevation: 6,
   },
   avatar: { width: 42, height: 42, borderRadius: 21, backgroundColor: colors.soft, alignItems: 'center', justifyContent: 'center', marginRight: 7 },
