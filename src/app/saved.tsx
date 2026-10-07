@@ -1,5 +1,6 @@
 import { router } from 'expo-router';
-import { Text } from 'react-native';
+import { } from 'react-native';
+import { Text } from '../components/Typography';
 import { Page } from '../components/Page';
 import { categoryIcon, placeSubtitle } from '../components/sheets/ExploreSheets';
 import { Button, LinkButton, Row, styles } from '../components/ui';

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
+import { Text } from '../Typography';
 import { colors } from '../../config';
 import { useI18n, type StringKey } from '../../i18n';
 import type { SuggestionKind, Topic } from '../../lib/community';
@@ -43,7 +44,7 @@ export function ReportPinSheet({ onLayout, subtitle, busy, onSend }: SheetProps 
       <Text style={[styles.rowLabel, { fontWeight: '500', marginBottom: 12 }]}>{t('report.moveMap')}</Text>
       {showNote ? (
         <TextInput value={note} onChangeText={setNote} placeholder={t('report.addNote')} placeholderTextColor={colors.muted}
-          maxLength={500} style={[styles.input, { marginBottom: 12 }]} />
+          maxLength={500} style={[styles.TextInput, { marginBottom: 12 }]} />
       ) : null}
       <Button label={busy ? t('report.sending') : t('report.send')} busy={busy} onPress={() => onSend(note)} />
       {!showNote ? <LinkButton label={t('report.addNote')} onPress={() => setShowNote(true)} /> : null}
@@ -115,9 +116,9 @@ export function SuggestionFormSheet({ onLayout, kind, initialName, busy, onKind,
         {SUGGEST_CHOICES.map(c => <Chip key={c.kind} label={t(`kind.${c.kind}` as StringKey)} active={kind === c.kind} onPress={() => onKind(c.kind)} />)}
       </View>
       <TextInput value={name} onChangeText={setName} placeholder={t('suggestion.name')} placeholderTextColor={colors.muted} maxLength={140}
-        style={[styles.input, { marginBottom: 8 }]} />
+        style={[styles.TextInput, { marginBottom: 8 }]} />
       <TextInput value={notes} onChangeText={setNotes} placeholder={t('suggestion.notes')} placeholderTextColor={colors.muted} maxLength={1200} multiline
-        style={[styles.input, { height: 70, paddingTop: 10, textAlignVertical: 'top', marginBottom: 10 }]} />
+        style={[styles.TextInput, { height: 70, paddingTop: 10, textAlignVertical: 'top', marginBottom: 10 }]} />
       <Button label={t('suggestion.submit')} busy={busy} disabled={!name.trim()} onPress={() => onSubmit(name, notes)} />
       <View style={{ alignItems: 'center' }}><LinkButton label={t('common.cancel')} color={colors.muted} onPress={onCancel} /></View>
     </Sheet>

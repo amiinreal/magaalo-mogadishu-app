@@ -8,7 +8,7 @@ const PAGE_SCRIPT = String.raw`
 var post = function (msg) { window.ReactNativeWebView && window.ReactNativeWebView.postMessage(JSON.stringify(msg)); };
 var CFG = window.MAGAALO, BOUNDS = CFG.bounds;
 var inside = function (lng, lat) { return lng >= BOUNDS.west && lng <= BOUNDS.east && lat >= BOUNDS.south && lat <= BOUNDS.north; };
-var state = { basemap: 'satellite', roads: true, buildings: true, places: true, community: true, transport: false, districts: false,
+var state = { basemap: 'street', roads: true, buildings: true, places: true, community: true, transport: false, districts: false,
   alerts: true, debug: false, districtOpacity: 24, padBottom: 260, padTop: 120 };
 
 var map = L.map('map', { zoomControl: false, minZoom: 12, maxZoom: 20, preferCanvas: true,
@@ -24,8 +24,10 @@ L.control.scale({ imperial: false, maxWidth: 100, position: 'bottomleft' }).addT
 // Same base layers as the website.
 var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
   maxZoom: 20, maxNativeZoom: 19, attribution: 'Imagery © <a href="https://www.esri.com/">Esri</a>, Vantor, Earthstar Geographics' });
+map.createPane('streetBase'); map.getPane('streetBase').style.zIndex = 200;
+map.getPane('streetBase').style.filter = 'saturate(.35) brightness(1.04)';
 var street = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 20, maxNativeZoom: 19, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' });
+  pane: 'streetBase', maxZoom: 20, maxNativeZoom: 19, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' });
 
 // ---------------- Atlas data (website /data/atlas.json) ----------------
 var atlas = null, atlasPromise = null;
@@ -71,10 +73,10 @@ function draw(ctx, data, src, group, zoom) {
     ctx.beginPath(); var paths = lines(type, c);
     paths.forEach(function (line) { line.forEach(function (v, i) { var xy = toXY(v); i ? ctx.lineTo(xy[0], xy[1]) : ctx.moveTo(xy[0], xy[1]); }); if (group === 'buildings') ctx.closePath(); });
     if (group === 'buildings') {
-      ctx.fillStyle = basemap === 'satellite' ? 'rgba(239,194,119,.18)' : 'rgba(226,163,76,.16)'; ctx.fill('evenodd');
-      ctx.strokeStyle = basemap === 'satellite' ? 'rgba(250,208,144,.85)' : 'rgba(174,115,40,.7)'; ctx.lineWidth = .8; ctx.stroke();
+      ctx.fillStyle = basemap === 'satellite' ? 'rgba(239,194,119,.18)' : 'rgba(213,218,207,.30)'; ctx.fill('evenodd');
+      ctx.strokeStyle = basemap === 'satellite' ? 'rgba(250,208,144,.85)' : 'rgba(173,184,170,.45)'; ctx.lineWidth = .8; ctx.stroke();
     } else {
-      ctx.strokeStyle = basemap === 'satellite' ? 'rgba(247,204,130,.85)' : 'rgba(163,112,48,.5)'; ctx.lineWidth = MAJOR[p.highway] ? 2 : 1; ctx.stroke();
+      ctx.strokeStyle = basemap === 'satellite' ? 'rgba(247,204,130,.85)' : 'rgba(255,255,255,.7)'; ctx.lineWidth = MAJOR[p.highway] ? 2 : 1; ctx.stroke();
       var name = p.name || p['name:en'];
       if (name && zoom >= 14 && !dedup[name]) {
         var best = null, length = 0;
@@ -102,7 +104,7 @@ function cityTileLayer(group) {
       var src = sourceCoords(coords, group);
       loadAtlas().then(function () { return dataTile(group, src); }).then(function (data) {
         var ctx = tile.getContext('2d'); ctx.scale(ratio, ratio); draw(ctx, data, src, group, coords.z);
-        if (state.debug) { ctx.strokeStyle = 'rgba(210,59,59,.6)'; ctx.strokeRect(0, 0, 256, 256); ctx.fillStyle = '#d23b3b'; ctx.font = '10px monospace'; ctx.textAlign = 'left'; ctx.fillText(group + ' ' + coords.z + '/' + coords.x + '/' + coords.y, 4, 12); }
+        if (state.debug) { ctx.strokeStyle = 'rgba(210,59,59,.6)'; ctx.strokeRect(0, 0, 256, 256); ctx.fillStyle = '#C54435'; ctx.font = '10px monospace'; ctx.textAlign = 'left'; ctx.fillText(group + ' ' + coords.z + '/' + coords.x + '/' + coords.y, 4, 12); }
         tile._data = data; tile._source = src; done(null, tile);
       }).catch(function (e) { done(e, tile); });
       return tile;
@@ -266,7 +268,7 @@ function drawDistricts() {
 // ---------------- Dynamic overlays from the app ----------------
 var routeLayer = L.featureGroup().addTo(map), altLayer = L.featureGroup().addTo(map), alertLayer = L.featureGroup(), markerLayer = L.featureGroup().addTo(map), userLayer = L.featureGroup().addTo(map), drawLayer = L.featureGroup().addTo(map);
 var routeBounds = null, follow = false, followZoom = 17, userMarker = null, userHalo = null, lastUser = null, lastAlerts = [];
-var ALERT_STYLE = { road_closure: ['#d23b3b', '<div class="bar"></div>'], flooding: ['#2b7bd6', '≈'], traffic: ['#e8862a', '≡'], hazard: ['#e8aa49', '!'], building: ['#2f7d5b', '⌂'], buildingGone: ['#7a7a7a', '×'] };
+var ALERT_STYLE = { road_closure: ['#C54435', '<div class="bar"></div>'], flooding: ['#2b7bd6', '≈'], traffic: ['#e8862a', '≡'], hazard: ['#e8aa49', '!'], building: ['#2f7d5b', '⌂'], buildingGone: ['#7a7a7a', '×'] };
 function setAlerts(alerts) {
   lastAlerts = alerts; alertLayer.clearLayers();
   alerts.forEach(function (a) {
@@ -288,9 +290,9 @@ function setRoute(msg) {
   if (!msg.coords) return;
   var ll = msg.coords.map(function (c) { return [c[1], c[0]]; });
   L.polyline(ll, { pane: 'routePane', color: '#fff', weight: 10, opacity: .95, interactive: false }).addTo(routeLayer);
-  var main = L.polyline(ll, { pane: 'routePane', color: '#2f6fe8', weight: 6, interactive: false }).addTo(routeLayer);
+  var main = L.polyline(ll, { pane: 'routePane', color: '#2874EF', weight: 6, interactive: false }).addTo(routeLayer);
   // Last metres from the road access point to the building entrance.
-  if (msg.walkTo) L.polyline([ll[ll.length - 1], [msg.walkTo[1], msg.walkTo[0]]], { pane: 'routePane', color: '#2f6fe8', weight: 4, dashArray: '2 8', lineCap: 'round', interactive: false }).addTo(routeLayer);
+  if (msg.walkTo) L.polyline([ll[ll.length - 1], [msg.walkTo[1], msg.walkTo[0]]], { pane: 'routePane', color: '#2874EF', weight: 4, dashArray: '2 8', lineCap: 'round', interactive: false }).addTo(routeLayer);
   routeBounds = main.getBounds();
   (msg.alternatives || []).forEach(function (coords) { coords.forEach(function (c) { routeBounds.extend([c[1], c[0]]); }); });
   if (msg.fit) fitRoute();
@@ -309,7 +311,7 @@ function setUser(u) {
   var ll = [u.lat, u.lng], cone = u.heading != null && u.heading >= 0 ? '<div class="cone" style="transform:rotate(' + u.heading + 'deg)"></div>' : '';
   var icon = L.divIcon({ className: '', html: '<div class="user">' + cone + '<div class="dot"></div></div>', iconSize: [44, 44], iconAnchor: [22, 22] });
   if (!userMarker) {
-    userHalo = L.circle(ll, { pane: 'userPane', radius: Math.min(u.accuracy || 20, 200), color: '#2f6fe8', weight: 0, fillOpacity: .12, interactive: false }).addTo(userLayer);
+    userHalo = L.circle(ll, { pane: 'userPane', radius: Math.min(u.accuracy || 20, 200), color: '#2874EF', weight: 0, fillOpacity: .12, interactive: false }).addTo(userLayer);
     userMarker = L.marker(ll, { pane: 'userPane', icon: icon, interactive: false }).addTo(userLayer);
   } else { userMarker.setLatLng(ll); userMarker.setIcon(icon); userHalo.setLatLng(ll); userHalo.setRadius(Math.min(u.accuracy || 20, 200)); }
   if (follow) followUser(true);
@@ -358,7 +360,7 @@ function applyConfig(cfg) {
 function handle(msg) {
   switch (msg.type) {
     case 'config': applyConfig(msg.config); break;
-    case 'padding': state.padBottom = msg.bottom; state.padTop = msg.top; break;
+    case 'padding': state.padBottom = msg.bottom; state.padTop = msg.top; document.documentElement.style.setProperty('--bottom', msg.bottom + 'px'); break;
     case 'alerts': setAlerts(msg.alerts); break;
     case 'route': setRoute(msg); break;
     case 'fitRoute': fitRoute(); break;
@@ -366,7 +368,7 @@ function handle(msg) {
     case 'user': setUser(msg.user); break;
     case 'follow': follow = msg.on; if (msg.zoom) followZoom = msg.zoom; if (follow) followUser(true); break;
     case 'flyTo': map.flyTo([msg.lat, msg.lng], msg.zoom || 17, { duration: .8 }); break;
-    case 'fitBounds': map.fitBounds([[BOUNDS.south, BOUNDS.west], [BOUNDS.north, BOUNDS.east]], { padding: [20, 20] }); break;
+    case 'fitBounds': map.fitBounds([[BOUNDS.south, BOUNDS.west], [BOUNDS.north, BOUNDS.east]], { paddingTopLeft: [20, state.padTop], paddingBottomRight: [20, state.padBottom] }); break;
     case 'access': accessFor(msg); break;
     case 'refresh': communityLoaded = false; if (state.community) loadCommunity(); if (state.transport) loadTransport(); roadLayer.redraw(); buildingLayer.redraw(); break;
     case 'draw': drawMode = msg.mode; drawPoints = []; refreshDrawing(); map.getContainer().style.cursor = drawMode ? 'crosshair' : ''; if (drawMode) map.doubleClickZoom.disable(); else map.doubleClickZoom.enable(); break;
@@ -407,9 +409,9 @@ post({ type: 'ready' });
 `;
 
 const PAGE_CSS = `
-html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#1d2a26;-webkit-tap-highlight-color:transparent}
+html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#F0F1EB;-webkit-tap-highlight-color:transparent}
 .leaflet-control-attribution{font-size:9px;background:rgba(255,255,255,.75)!important}
-.leaflet-bottom.leaflet-left{margin-bottom:var(--bottom,0)}
+.leaflet-bottom{margin-bottom:var(--bottom,0)}
 .place-name-label{background:rgba(255,255,255,.92);border:0;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.25);font:600 11px -apple-system,Roboto,sans-serif;color:#183b38;padding:2px 6px}
 .place-name-label:before{display:none}
 .district-label{font:700 11px -apple-system,Roboto,sans-serif;color:#fff;text-align:center;letter-spacing:.06em;text-transform:uppercase;text-shadow:0 0 3px #000,0 0 2px #000;white-space:nowrap}
@@ -417,11 +419,11 @@ html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#1d2a26;-web
 .alert.suspected{opacity:.7;border-style:dashed}
 .alert .bar{width:12px;height:3px;background:#fff;border-radius:2px}
 .user{position:relative;width:44px;height:44px}
-.user .dot{position:absolute;left:13px;top:13px;width:18px;height:18px;border-radius:50%;background:#2f6fe8;border:3px solid #fff;box-sizing:border-box;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.user .dot{position:absolute;left:13px;top:13px;width:18px;height:18px;border-radius:50%;background:#2874EF;border:3px solid #fff;box-sizing:border-box;box-shadow:0 1px 5px rgba(0,0,0,.35)}
 .user .cone{position:absolute;left:0;top:0;width:44px;height:44px;background:conic-gradient(from -30deg at 50% 50%,rgba(47,111,232,.35) 0deg,rgba(47,111,232,.35) 60deg,transparent 60deg);border-radius:50%}
-.start{width:16px;height:16px;border-radius:50%;background:#fff;border:5px solid #2f6fe8;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,.3)}
-.access{width:16px;height:16px;border-radius:4px;background:#2f6fe8;border:3px solid #fff;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,.3)}
-.pin{width:30px;height:30px;border-radius:50% 50% 50% 0;background:#d23b3b;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center}
+.start{width:16px;height:16px;border-radius:50%;background:#fff;border:5px solid #2874EF;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.access{width:16px;height:16px;border-radius:4px;background:#2874EF;border:3px solid #fff;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.pin{width:30px;height:30px;border-radius:50% 50% 50% 0;background:#C54435;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center}
 .pin div{width:10px;height:10px;border-radius:50%;background:#fff}
 #debug{display:none;position:absolute;left:8px;top:50%;z-index:1000;background:rgba(0,0,0,.6);color:#fff;font:11px monospace;padding:4px 6px;border-radius:4px}
 `;

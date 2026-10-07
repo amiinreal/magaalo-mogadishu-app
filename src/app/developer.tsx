@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Text } from '../components/Typography';
 import { Page } from '../components/Page';
 import { Button, Row, styles, ToggleRow } from '../components/ui';
 import { ATLAS_WEBSITE, MAP_STORAGE, OSRM_SERVERS, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from '../config';

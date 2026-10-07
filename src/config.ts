@@ -21,17 +21,17 @@ export const BOUNDS = { south: 1.93, west: 45.12, north: 2.23, east: 45.49 };
 export const CITY_CENTER = { lat: 2.046, lng: 45.318 };
 
 export const colors = {
-  ink: '#16302b',
-  muted: '#6b7a76',
-  line: '#e6ebe7',
+  ink: '#172F34',
+  muted: '#647579',
+  line: '#E4E9E6',
   paper: '#ffffff',
-  soft: '#f3f6f3',
-  blue: '#2f6fe8',
-  blueSoft: '#e8f0fe',
-  green: '#1d4b40',
-  amber: '#f2b33d',
-  red: '#d23b3b',
-  water: '#bfe0ec',
+  soft: '#F3F5F4',
+  blue: '#2874EF',
+  blueSoft: '#EAF2FF',
+  green: '#174D45',
+  amber: '#F3BF4F',
+  red: '#C54435',
+  water: '#C8E4EF',
 };
 
 export const DISTRICTS: [string, string][] = [

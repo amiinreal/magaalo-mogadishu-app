@@ -24,7 +24,7 @@ export type Settings = {
 export type Saved = { home?: Place; work?: Place; places: Place[]; recents: Place[] };
 
 const DEFAULT_SETTINGS: Settings = {
-  voice: true, basemap: 'satellite', roads: true, buildings: true, places: true, community: true, transport: false,
+  voice: true, basemap: 'street', roads: true, buildings: true, places: true, community: true, transport: false,
   districts: false, districtOpacity: 24, reports: true, developer: false, simulate: false, mapDebug: false,
 };
 const SETTINGS_KEY = 'magaalo.settings.v2';

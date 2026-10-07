@@ -2,6 +2,7 @@
   "expo": {
     "name": "Magaalo",
     "slug": "magaalo",
+    "platforms": ["ios", "android", "web"],
     "scheme": "magaalo",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -29,6 +30,7 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
+      "bundler": "metro",
       "favicon": "./assets/favicon.png"
     },
     "plugins": [

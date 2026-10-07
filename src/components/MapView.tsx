@@ -1,6 +1,6 @@
 import { useEffect, useImperativeHandle, useMemo, useRef, type Ref } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { WebView, type WebViewMessageEvent } from 'react-native-webview';
+import { MapSurface, type SurfaceHandle } from './MapSurface';
 import type { MapAlert } from '../lib/community';
 import type { LngLat } from '../lib/geo';
 import { buildMapHtml, MAP_BASE_URL } from './mapHtml';
@@ -64,16 +64,16 @@ type Props = {
 };
 
 export function MapView({ ref, config, alerts, route, alternatives, walkTo, fitRouteOnChange, markers, user, follow, padding, onEvent }: Props) {
-  const web = useRef<WebView>(null);
+  const web = useRef<SurfaceHandle>(null);
   const ready = useRef(false);
   const latest = useRef<Map<string, object>>(new Map());
   const pending = useRef(new Map<string, (a: Access | null) => void>());
-  const html = useMemo(buildMapHtml, []);
+  const html = useMemo(() => buildMapHtml(), []);
 
   // The latest message of each kind is kept and replayed whenever the page (re)loads.
   const send = (key: string, msg: object, replay = true) => {
     if (replay) latest.current.set(key, msg);
-    if (ready.current) web.current?.injectJavaScript(`window.magaaloReceive(${JSON.stringify(JSON.stringify(msg))});true;`);
+    if (ready.current) web.current?.send(JSON.stringify(msg));
   };
   const once = (msg: object) => send('view', msg, !ready.current);
 
@@ -102,9 +102,9 @@ export function MapView({ ref, config, alerts, route, alternatives, walkTo, fitR
   useEffect(() => send('user', { type: 'user', user: user ?? null }), [user?.lat, user?.lng, user?.heading, user?.accuracy]);
   useEffect(() => send('follow', { type: 'follow', on: follow, zoom: 17 }), [follow]);
 
-  const onMessage = (event: WebViewMessageEvent) => {
+  const onMessage = (data: string) => {
     let msg: MapEvent & { requestId?: string; access?: Access | null };
-    try { msg = JSON.parse(event.nativeEvent.data); } catch { return; }
+    try { msg = JSON.parse(data); } catch { return; }
     if ((msg as { type: string }).type === 'access' && msg.requestId) {
       pending.current.get(msg.requestId)?.(msg.access ?? null);
       pending.current.delete(msg.requestId);
@@ -123,22 +123,7 @@ export function MapView({ ref, config, alerts, route, alternatives, walkTo, fitR
 
   return (
     <View style={StyleSheet.absoluteFill}>
-      <WebView
-        ref={web}
-        originWhitelist={['*']}
-        source={{ html, baseUrl: MAP_BASE_URL }}
-        onMessage={onMessage}
-        javaScriptEnabled
-        domStorageEnabled
-        cacheEnabled
-        setSupportMultipleWindows={false}
-        bounces={false}
-        overScrollMode="never"
-        style={styles.web}
-        onContentProcessDidTerminate={() => { ready.current = false; web.current?.reload(); }}
-      />
+      <MapSurface ref={web} html={html} baseUrl={MAP_BASE_URL} onMessage={onMessage} onReload={() => { ready.current = false; }} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({ web: { flex: 1, backgroundColor: '#1d2a26' } });

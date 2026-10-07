@@ -1,5 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
-import { Linking, Text } from 'react-native';
+import { Linking, } from 'react-native';
+import { Text } from '../components/Typography';
 import { Page } from '../components/Page';
 import { Button, LinkButton, styles } from '../components/ui';
 import { ATLAS_WEBSITE } from '../config';

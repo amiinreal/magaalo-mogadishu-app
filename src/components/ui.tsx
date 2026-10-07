@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import type { ComponentProps, ReactNode } from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, Switch, Text, View, type LayoutChangeEvent, type StyleProp, type ViewStyle } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, Switch, View, type LayoutChangeEvent, type StyleProp, type ViewStyle } from 'react-native';
+import { Text } from './Typography';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../config';
 
@@ -135,16 +136,16 @@ export function Banner({ icon, title, hint, tone = 'dark' }: { icon: IconName; t
 
 export const styles = StyleSheet.create({
   sheet: {
-    position: 'absolute', left: 0, right: 0, bottom: 0, backgroundColor: '#fff', borderTopLeftRadius: 22, borderTopRightRadius: 22,
-    paddingHorizontal: 18, paddingTop: 8, shadowColor: '#000', shadowOpacity: 0.12, shadowRadius: 16, shadowOffset: { width: 0, height: -4 }, elevation: 14,
+    position: 'absolute', left: 0, right: 0, bottom: 0, backgroundColor: '#fff', borderTopLeftRadius: 26, borderTopRightRadius: 26,
+    paddingHorizontal: 20, paddingTop: 8, shadowColor: '#000', shadowOpacity: 0.12, shadowRadius: 16, shadowOffset: { width: 0, height: -4 }, elevation: 14,
   },
   handle: { alignSelf: 'center', width: 38, height: 4, borderRadius: 2, backgroundColor: '#d5dbd8', marginBottom: 12 },
-  title: { fontSize: 21, fontWeight: '700', color: colors.ink },
+  title: { fontSize: 24, fontWeight: '700', color: colors.ink },
   sub: { fontSize: 13, color: colors.muted, marginTop: 3 },
-  button: { height: 50, borderRadius: 12, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', paddingHorizontal: 16 },
+  button: { height: 52, borderRadius: 16, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', paddingHorizontal: 16 },
   buttonText: { fontSize: 16, fontWeight: '700' },
   row: { flexDirection: 'row', alignItems: 'center', paddingVertical: 11, borderRadius: 10, minHeight: 48 },
-  rowIcon: { width: 30 },
+  rowIcon: { width: 40, padding: 8, marginRight: 10, borderRadius: 12, backgroundColor: colors.soft, overflow: 'hidden' },
   rowLabel: { fontSize: 15, fontWeight: '600' },
   rowHint: { fontSize: 12, color: colors.muted, marginTop: 2 },
   chip: {
@@ -155,5 +156,5 @@ export const styles = StyleSheet.create({
   round: { alignItems: 'center', justifyContent: 'center', shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 5 },
   star: { borderRadius: 999, borderWidth: 1.5, alignItems: 'center', justifyContent: 'center' },
   banner: { flexDirection: 'row', borderRadius: 14, padding: 12, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 8, elevation: 6 },
-  input: { borderWidth: 1, borderColor: colors.line, borderRadius: 12, paddingHorizontal: 14, height: 48, fontSize: 15, color: colors.ink, backgroundColor: '#fff' },
+  TextInput: { borderWidth: 1, borderColor: colors.line, borderRadius: 12, paddingHorizontal: 14, height: 48, fontSize: 15, fontFamily: 'DMSans_400Regular', color: colors.ink, backgroundColor: '#fff' },
 });

@@ -328,5 +328,9 @@
   "network.gaps": "{n} isku xir oo u badan inay maqan yihiin ayaa la helay",
   "network.gapsHint": "Nidaam barasho mashiin, {recall}% saxnaan isgoysyada la tijaabiyay; {joins} waxay dib u xiri lahaayeen qaybaha go'an. Waxaa loo diray dib-u-eegayaasha, jidadka looma isticmaalo ilaa la aqbalo.",
   "network.linked": "{linked} ka mid ah {total} dhismayaal ayaa waddo ku xiran",
-  "network.linkedHint": "Celcelis ahaan {m} m ilaa waddada; {named} waxay ku yaalliin waddo magac leh; {places} meelood ayaa ku xiran."
+  "network.linkedHint": "Celcelis ahaan {m} m ilaa waddada; {named} waxay ku yaalliin waddo magac leh; {places} meelood ayaa ku xiran.",
+  "explore.expand": "Muuji goobo iyo talooyin dheeraad ah",
+  "explore.collapse": "Muuji wax yar",
+  "place.moreDetails": "Faahfaahin iyo talooyin",
+  "place.lessDetails": "Qari faahfaahinta"
 }

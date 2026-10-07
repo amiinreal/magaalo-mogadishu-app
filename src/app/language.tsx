@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Text } from 'react-native';
+import { } from 'react-native';
+import { Text } from '../components/Typography';
 import { Page } from '../components/Page';
 import { Row, styles } from '../components/ui';
 import { colors } from '../config';

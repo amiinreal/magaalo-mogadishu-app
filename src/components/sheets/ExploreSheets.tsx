@@ -1,6 +1,9 @@
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { HomeSheet } from '../HomeSheet';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Linking, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Linking, Pressable, ScrollView, TextInput, View } from 'react-native';
+import { Text } from '../Typography';
 import { colors } from '../../config';
 import { formatAgo, useI18n, type StringKey } from '../../i18n';
 import { destinationRating, type MapAlert } from '../../lib/community';
@@ -48,13 +51,7 @@ export function ExploreSheet({ onLayout, onOpenPlace, onSaved, onPickHome, onPic
   const { t } = useI18n();
   const { saved } = useApp();
   return (
-    <Sheet onLayout={onLayout}>
-      <Title>{t('explore.whereGoing')}</Title>
-      <Row icon="home-outline" label={t('explore.home')} hint={saved.home?.name ?? t('explore.homeHint')}
-        onPress={() => (saved.home ? onOpenPlace(saved.home) : onPickHome())} />
-      <Row icon="briefcase-outline" label={t('explore.work')} hint={saved.work?.name ?? t('explore.workHint')}
-        onPress={() => (saved.work ? onOpenPlace(saved.work) : onPickWork())} />
-      <Row icon="bookmark-outline" label={t('explore.saved')} hint={t('explore.savedHint')} onPress={onSaved} />
+    <HomeSheet onLayout={onLayout} extra={<>
       <Text style={[styles.rowHint, { marginTop: 6, letterSpacing: 1 }]}>{t('discover.title').toUpperCase()}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingVertical: 8 }}>
         {DISCOVER.map(d => (
@@ -67,7 +64,15 @@ export function ExploreSheet({ onLayout, onOpenPlace, onSaved, onPickHome, onPic
         ))}
       </ScrollView>
       <Row icon="create-outline" label={t('improve.title')} hint={t('improve.hint')} onPress={onImprove} color={colors.blue} />
-    </Sheet>
+    </>}>
+
+      <Title>{t('explore.whereGoing')}</Title>
+      <Row icon="home-outline" label={t('explore.home')} hint={saved.home?.name ?? t('explore.homeHint')}
+        onPress={() => (saved.home ? onOpenPlace(saved.home) : onPickHome())} />
+      <Row icon="briefcase-outline" label={t('explore.work')} hint={saved.work?.name ?? t('explore.workHint')}
+        onPress={() => (saved.work ? onOpenPlace(saved.work) : onPickWork())} />
+      <Row icon="bookmark-outline" label={t('explore.saved')} hint={t('explore.savedHint')} onPress={onSaved} />
+    </HomeSheet>
   );
 }
 
@@ -75,6 +80,7 @@ export function SearchSheet({ onLayout, initialQuery, near, onSelect, onChooseOn
   initialQuery: string; near?: { lat: number; lng: number }; onSelect: (p: Place) => void; onChooseOnMap: () => void; onClose: () => void;
 }) {
   const { t } = useI18n();
+  const insets = useSafeAreaInsets();
   const { saved } = useApp();
   const [query, setQuery] = useState(initialQuery);
   const [results, setResults] = useState<Place[] | null>(null);
@@ -93,18 +99,18 @@ export function SearchSheet({ onLayout, initialQuery, near, onSelect, onChooseOn
 
   const list = results ?? saved.recents;
   return (
-    <Sheet onLayout={onLayout} style={{ top: 0, paddingTop: 54 }}>
+    <Sheet onLayout={onLayout} style={{ top: insets.top + 12, paddingTop: 10 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 6 }}>
         <Text style={[styles.title, { flex: 1 }]}>{t('search.title')}</Text>
         <Pressable accessibilityRole="button" accessibilityLabel={t('common.close')} onPress={onClose} hitSlop={12}>
           <Ionicons name="close" size={26} color={colors.ink} />
         </Pressable>
       </View>
-      <View style={[styles.input, { flexDirection: 'row', alignItems: 'center', marginBottom: 6 }]}>
+      <View style={[styles.TextInput, { flexDirection: 'row', alignItems: 'center', marginBottom: 6 }]}>
         <Ionicons name="search" size={18} color={colors.muted} style={{ marginRight: 8 }} />
         <TextInput
           autoFocus value={query} onChangeText={setQuery} placeholder={t('search.placeholder')} placeholderTextColor={colors.muted}
-          style={{ flex: 1, fontSize: 16, color: colors.ink }} returnKeyType="search" autoCorrect={false}
+          style={{ flex: 1, fontSize: 16, fontFamily: 'DMSans_400Regular', color: colors.ink }} returnKeyType="search" autoCorrect={false}
           onSubmitEditing={() => results?.[0] && onSelect(results[0])}
         />
         {loading ? <ActivityIndicator size="small" color={colors.blue} /> : null}
@@ -135,6 +141,8 @@ export function PlaceSheet({ onLayout, place, access, onDirections, onSuggest, o
     destinationRating(place.lat, place.lng).then(setRating).catch(() => {});
   }, [place.lat, place.lng]);
   const saved = isSaved(place);
+  const [details, setDetails] = useState(false);
+
   const suggestLabel = place.kind === 'road' ? (place.name ? t('suggest.roadCorrection') : t('suggest.streetName')) : t('place.suggest');
   return (
     <Sheet onLayout={onLayout}>
@@ -147,15 +155,17 @@ export function PlaceSheet({ onLayout, place, access, onDirections, onSuggest, o
             <Ionicons name={saved ? 'bookmark' : 'bookmark-outline'} size={24} color={saved ? colors.blue : colors.ink} />
           </Pressable>
         </View>
-        <Text style={[styles.sub, { marginTop: -4, marginBottom: 8 }]}>
+        {rating ? <Text style={[styles.sub, { marginTop: -4, marginBottom: 8 }]}>
           {rating ? t('place.rating', { rating: rating.average.toFixed(1), count: rating.reviews }) : t('place.noReviews')}
-        </Text>
+        </Text> : null}
+        <Button label={t('place.directions')} icon="navigate" onPress={onDirections} />
+        <Row icon={details ? 'chevron-up' : 'chevron-down'} label={t(details ? 'place.lessDetails' : 'place.moreDetails')} onPress={() => setDetails(v => !v)} color={colors.blue} />
+        {details ? <>
         {/* Where this place meets the road network: routes end here, then a short walk to the door. */}
         {place.kind !== 'road' ? (
           <Row icon="git-network-outline" label={access === undefined ? t('place.accessFinding') : access ? (access.street ? t('place.onStreet', { street: access.street }) : t('place.unnamedRoad')) : t('place.noAccess')}
             hint={access ? t('place.accessHint', { m: access.distance }) : undefined} />
         ) : null}
-        <Button label={t('place.directions')} icon="navigate" onPress={onDirections} />
         {place.phone ? <Row icon="call-outline" label={place.phone} onPress={() => Linking.openURL(`tel:${place.phone!.replace(/[^\d+]/g, '')}`)} color={colors.blue} /> : null}
         {place.website ? <Row icon="globe-outline" label={place.website.replace(/^https?:\/\//, '')} onPress={() => Linking.openURL(/^https?:/.test(place.website!) ? place.website! : `https://${place.website}`)} color={colors.blue} /> : null}
         {place.openingHours ? <Row icon="time-outline" label={place.openingHours} /> : null}
@@ -171,6 +181,7 @@ export function PlaceSheet({ onLayout, place, access, onDirections, onSuggest, o
           <Chip label={t('place.setWork')} icon="briefcase-outline" onPress={() => setWork(place)} />
         </View>
         {place.source ? <Text style={[styles.rowHint, { marginTop: 10 }]}>{place.source}</Text> : null}
+        </> : null}
       </ScrollView>
     </Sheet>
   );
@@ -189,7 +200,7 @@ export function PickSheet({ onLayout, title, hint, confirm, onConfirm, onCancel 
   );
 }
 
-export function LayersSheet({ onLayout, onClose }: SheetProps & { onClose: () => void }) {
+export function LayersSheet({ onLayout, onClose, onShowAll }: SheetProps & { onClose: () => void; onShowAll: () => void }) {
   const { t } = useI18n();
   const { settings, updateSettings } = useApp();
   return (
@@ -204,6 +215,7 @@ export function LayersSheet({ onLayout, onClose }: SheetProps & { onClose: () =>
         <Chip label={t('layers.street')} icon="map-outline" active={settings.basemap === 'street'} onPress={() => updateSettings({ basemap: 'street' })} />
         <Chip label={t('layers.satellite')} icon="earth-outline" active={settings.basemap === 'satellite'} onPress={() => updateSettings({ basemap: 'satellite' })} />
       </View>
+      <Row icon="expand-outline" label={t('map.showAll')} onPress={onShowAll} />
       <ScrollView style={{ maxHeight: 380 }}>
         <ToggleRow icon="grid-outline" label={t('layers.districts')} hint={t('layers.districtsHint')} value={settings.districts} onChange={v => updateSettings({ districts: v })} />
         {settings.districts ? (
