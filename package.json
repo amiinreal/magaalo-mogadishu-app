@@ -29,11 +29,12 @@
     "react-native-webview": "13.16.1"
   },
   "devDependencies": {
+    "@expo/ngrok": "^4.1.3",
     "@types/react": "~19.2.2",
     "eslint": "^9.0.0",
+    "eslint-config-expo": "~57.0.2",
     "leaflet": "^1.9.4",
-    "typescript": "~6.0.3",
-    "eslint-config-expo": "~57.0.2"
+    "typescript": "~6.0.3"
   },
   "scripts": {
     "start": "expo start --go --lan",
@@ -45,7 +46,8 @@
     "corpus": "node scripts/build-corpus.mjs",
     "check": "npm run typecheck && node scripts/check-i18n.mjs",
     "web": "expo start --web",
-    "start:tunnel": "expo start --go --tunnel"
+    "start:tunnel": "expo start --go --tunnel",
+    "mobile": "expo start --go --tunnel --clear"
   },
   "private": true
 }
