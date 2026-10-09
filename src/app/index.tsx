@@ -124,7 +124,7 @@ export default function MapScreen() {
       const routes = await planRoute(from, next.dest, next.mode, alerts);
       setTrip({ ...next, routes, selected: 0, loading: false });
     } catch (error) {
-      setTrip({ ...next, routes: [], selected: 0, loading: false, error: (error as { status?: number }).status === 422 ? (error as Error).message : t('route.failed') });
+      setTrip({ ...next, routes: [], selected: 0, loading: false, error: (error as { code?: string }).code === 'OUTSIDE_SERVICE_AREA' ? t('route.outside') : (error as { status?: number }).status === 422 ? (error as Error).message : t('route.failed') });
     }
   }, [fixInside?.lat, fixInside?.lng, fix, alerts, t]);
 

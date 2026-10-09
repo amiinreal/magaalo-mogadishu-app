@@ -1,5 +1,5 @@
 import { ATLAS_WEBSITE, OSRM_SERVERS, VALHALLA_URL } from '../config';
-import { decodePolyline, routeProgress, squareAround, type LngLat, type Point } from './geo';
+import { decodePolyline, inside, routeProgress, squareAround, type LngLat, type Point } from './geo';
 import type { MapAlert } from './community';
 
 export type Mode = 'driving' | 'walking' | 'cycling';
@@ -130,6 +130,9 @@ const hits = (route: Route, closures: MapAlert[]) =>
  * cannot be reached, and applies closure avoidance on the device in that case.
  */
 export async function planRoute(from: Point, to: Point, mode: Mode, alerts: MapAlert[]): Promise<Route[]> {
+  if (!inside(from.lng, from.lat) || !inside(to.lng, to.lat)) {
+    throw Object.assign(new Error('Navigation is available in Mogadishu only.'), { code: 'OUTSIDE_SERVICE_AREA' });
+  }
   const closures = closureAlerts(alerts);
   let routes: Route[];
   let serverHandledClosures = false;

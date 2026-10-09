@@ -11,8 +11,9 @@ var inside = function (lng, lat) { return lng >= BOUNDS.west && lng <= BOUNDS.ea
 var state = { basemap: 'street', roads: true, buildings: true, places: true, community: true, transport: false, districts: false,
   alerts: true, debug: false, districtOpacity: 24, padBottom: 260, padTop: 120 };
 
-var map = L.map('map', { zoomControl: false, minZoom: 12, maxZoom: 20, preferCanvas: true,
-  maxBounds: [[BOUNDS.south, BOUNDS.west], [BOUNDS.north, BOUNDS.east]], maxBoundsViscosity: 1 }).setView([CFG.center.lat, CFG.center.lng], 14);
+// Browsing is unrestricted; BOUNDS is only the Mogadishu data/service boundary.
+var map = L.map('map', { zoomControl: false, minZoom: 4, maxZoom: 20, preferCanvas: true,
+  touchZoom: true, dragging: true, scrollWheelZoom: true }).setView([CFG.center.lat, CFG.center.lng], 14);
 map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
 map.attributionControl.addAttribution('Districts: OCHA / HDX · Features: OSM / Overture Maps');
 L.control.scale({ imperial: false, maxWidth: 100, position: 'bottomleft' }).addTo(map);
@@ -110,7 +111,7 @@ function cityTileLayer(group) {
       return tile;
     }
   });
-  return new Layer({ tileSize: 256, minZoom: group === 'buildings' ? 15 : 12, maxNativeZoom: 16, maxZoom: 20, keepBuffer: 1, updateInterval: 160, pane: group === 'buildings' ? 'buildingPane' : 'roadPane' });
+  return new Layer({ tileSize: 256, bounds: [[BOUNDS.south, BOUNDS.west], [BOUNDS.north, BOUNDS.east]], minZoom: group === 'buildings' ? 15 : 12, maxNativeZoom: 16, maxZoom: 20, keepBuffer: 1, updateWhenIdle: true, updateWhenZooming: false, pane: group === 'buildings' ? 'buildingPane' : 'roadPane' });
 }
 var roadLayer = cityTileLayer('roads'), buildingLayer = cityTileLayer('buildings');
 
@@ -194,11 +195,15 @@ function accessFor(msg) {
 var placeLayer = L.featureGroup();
 function drawPlaces() {
   placeLayer.clearLayers();
-  if (!atlas || !state.places) return;
-  var bounds = map.getBounds(), zoom = map.getZoom(), occupied = [];
+  if (!atlas || !state.places || map.getZoom() < 14) return;
+  var bounds = map.getBounds(), zoom = map.getZoom(), occupied = [], cells = {}, count = 0;
   (atlas.place_features || []).forEach(function (feature) {
     var c = feature.geometry.coordinates, lat = c[1], lng = c[0], p = feature.properties || {}, name = p.name || p['name:en'];
-    if (!bounds.contains([lat, lng]) || (zoom < 15 && !name)) return;
+    if (count >= 150 || !inside(lng, lat) || !bounds.contains([lat, lng]) || (zoom < 15 && !name)) return;
+    var pixel = map.latLngToContainerPoint([lat, lng]);
+    var cell = Math.floor(pixel.x / 36) + ':' + Math.floor(pixel.y / 36);
+    if (cells[cell]) return;
+    cells[cell] = true; count++;
     var business = p.shop || p.office || p.craft || p.category || p.basic_category;
     var marker = L.circleMarker([lat, lng], { pane: 'placePane', radius: business ? 6 : 5, color: 'white', weight: 1.5, fillColor: business ? '#ae793a' : '#477e71', fillOpacity: 1 });
     marker.on('click', function (e) { L.DomEvent.stopPropagation(e); post({ type: 'place', feature: feature }); });
@@ -388,7 +393,15 @@ document.addEventListener('message', function (e) { window.magaaloReceive(e.data
 window.addEventListener('message', function (e) { window.magaaloReceive(e.data); });
 
 var userGesture = false;
-map.on('dragstart', function () { userGesture = true; if (follow) { follow = false; post({ type: 'unfollow' }); } });
+function releaseFollow() {
+  userGesture = true;
+  if (follow) { follow = false; post({ type: 'unfollow' }); }
+}
+// Stop following before a pinch/wheel gesture, not after GPS can reset its zoom.
+map.on('dragstart', releaseFollow);
+L.DomEvent.on(map.getContainer(), 'touchstart mousedown wheel dblclick keydown', function () {
+  releaseFollow(); map.stop();
+});
 map.on('moveend', function () {
   var c = map.getCenter(); drawPlaces();
   post({ type: 'center', lat: c.lat, lng: c.lng, zoom: map.getZoom(), user: userGesture }); userGesture = false;
@@ -396,13 +409,16 @@ map.on('moveend', function () {
 });
 map.on('click', function (e) {
   var lat = e.latlng.lat, lng = e.latlng.lng;
-  if (!inside(lng, lat)) { post({ type: 'outside' }); return; }
+  if (!inside(lng, lat)) { if (drawMode) post({ type: 'outside' }); else post({ type: 'press', lat: lat, lng: lng }); return; }
   if (drawMode) { drawPoints.push(e.latlng); refreshDrawing(); if (drawMode === 'Point') finishDrawing(); return; }
   var f = (state.buildings ? tileFeatureAt(buildingLayer, e.latlng) : null) || (state.roads ? tileFeatureAt(roadLayer, e.latlng) : null);
   if (f) post({ type: 'feature', feature: f, lat: lat, lng: lng });
   else post({ type: 'press', lat: lat, lng: lng });
 });
-map.on('contextmenu', function (e) { if (!drawMode) post({ type: 'longpress', lat: e.latlng.lat, lng: e.latlng.lng }); });
+map.on('contextmenu', function (e) {
+  if (!inside(e.latlng.lng, e.latlng.lat)) { post({ type: 'outside' }); return; }
+  if (!drawMode) post({ type: 'longpress', lat: e.latlng.lat, lng: e.latlng.lng });
+});
 satellite.on('tileerror', (function () { var n = 0; return function () { if (++n === 6) post({ type: 'status', message: 'satellite-failed' }); }; })());
 loadAtlas().then(drawPlaces).catch(function () {});
 post({ type: 'ready' });

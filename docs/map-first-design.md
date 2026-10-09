@@ -4,6 +4,8 @@ Reference: [Magaalo Figma, Explore](https://www.figma.com/design/E7vZ3UmRtPabqO2
 
 The map stays behind floating search and category chips. Two primary controls expose layers and location; the city overview and satellite switch live inside Map details. A yellow report button remains above the bottom sheet. The home sheet opens compact with Home, Work and Saved; drag or tap its handle to reveal discovery and suggestions. Place cards prioritize Directions and put secondary information behind Details & suggestions.
 
+Browse freely across Somalia by dragging or zooming out. The basemap is unrestricted; detailed city tiles, contributions and routing remain limited to the Mogadishu service boundary. During navigation, touching or zooming the map releases follow mode; use Recenter to resume. GPS updates should never reset a manually chosen view. Android's map document is isolated from React screen updates, city tiles wait until gestures finish, and place markers are reduced at wider zoom levels to limit rendering work. `npm run test:map` checks these interaction and service-boundary regressions.
+
 DM Sans, the Figma palette, rounded surfaces and green maneuver banners are shared across screens. The live OpenStreetMap basemap uses subdued colors; its real cartography differs from the schematic streets in Figma. Existing saved basemap preferences are preserved; new installations default to Street. Existing users can select Street under Map details.
 
 ## Run and verify
