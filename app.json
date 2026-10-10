@@ -43,6 +43,19 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "8a9c72c1-77d4-49eb-9b41-618e4d388f5b"
+      }
+    },
+    "owner": "amiinreal",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8a9c72c1-77d4-49eb-9b41-618e4d388f5b"
     }
   }
 }
